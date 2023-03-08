@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="main_div">
+        <h1 id = "Main_header">Starting experiment</h1>
+
+        <hr>
+
+        <h4 id = "Small_header">When you are ready to continue, click the button below.</h4>
+
+        <div id = "feedback_div" style = "display:none">
+
+        <hr>
+
+        <h4 id = "Answer"> </h4>
+        <h4 id = "Advice"> </h4>
+
+        </div>
+
+        <div id = "Info_div" style = "display:none">
+
+        <hr>
+
+        <h4 id = "first_guess"> </h4>
+        <h4 id = "Social_info"> </h4>
+        <h4 id = "extra_info" style = "display:none">Before doing so, you may choose to view information from player A. You may view their advice or spy on them.</h4>
+
+        </div>
+
+        <div id = "stimulus_div" style = "display:none;">
+           <div class="trial_text" id="stimulus_div" style="height: 430px;">
+             <img id="stimulus" class="stimulus_image" src="" width="500px"/>
+           </div>            
+        </div>
+    <div class = "row" id = "Slider" style = "display:none;">
+       <div class = "col-md-12 text-center">
+            <div class = "slidecontainer">
+                <input id="answerslider" type="text" class="js-range-slider" name="my_range" value=""data-min="-10"
+                data-max="10"
+                data-from="0">
+            </div>
+        </div>
+    </div>  
+    </div>
+
+    <div id = "button_div" style = "display:none">
+        <div class = "row">
+            <div class = "col-md-3 text-center">
+                <button type="button" class="btn btn-info btn-lg" onClick="displayAdvice();">See advice</button>                 
+            </div>
+            <div class = "col-md-6 text-center"></div>
+            <div class = "col-md-3 text-center">
+                <button type="button" class="btn btn-info btn-lg" onClick="displaySpy();">Spy</button>                 
+            </div>            
+        </div> 
+        <div class = "row">
+            <div class="col-md-12"></div>
+                <p> </p>
+        </div> 
+    </div>        
+
+    <div class = "row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3"> 
+            <button id = "Next" type="button" class="btn btn-success btn-lg" onClick="continueTrial();">
+            Continue</button> 
+            <button id = "Submit_answer" type="button" class="btn btn-success btn-lg" style = "display:none" onClick="submitAnswer(guessSlider.prop('value'));">
+            Submit answer</button>
+            <button id = "Submit_advice" type="button" class="btn btn-success btn-lg" style = "display:none" onClick="submitAdvice(guessSlider.prop('value'));">
+            Submit advice</button>
+            <button id = "Submit_revision" type="button" class="btn btn-success btn-lg" style = "display:none" onClick="submitRevision(guessSlider.prop('value'));">
+            Submit answer</button>                                                                                                                        
+        </div>
+    </div>         
+{% endblock %}
+
+{% block scripts %}
+    <script>
+     document.addEventListener("DOMContentLoaded", function() {
+        determinePlayer();
+        getInfo();
+        tickClock(); 
+      });
+    var guessSlider= $("#answerslider");
+    $("#answerslider").ionRangeSlider({
+    skin: "big",
+     });
+       guessSlider.on("change", function(){
+          updatePoints(guessSlider.prop('value'));
+       });          
+    </script>
+{% endblock %}

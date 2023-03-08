@@ -1,0 +1,21 @@
+{% extends "base/consent.html" %}
+
+{% block consent_text %}
+
+<p><strong>CONSENT FORM GOES HERE</strong>
+
+</p>
+
+<p><strong>Thank you for taking the time to read this Participant Information Leaflet.</strong></p>
+
+{% endblock consent_text %}
+
+{% block consent_button %}
+<button type="button" class="btn btn-primary btn-lg" id="consent" onClick="window.location='instructions/Instructions?{{query_string | safe}}';" style="float: left;">I agree (begin experiment)
+</button>
+{% endblock consent_button %}
+            
+{% block reject_button %}
+<button type="button" class="btn btn-danger btn-lg" onClick="self.close();" style="float: right;">I do not agree (exit experiment)
+</button>
+{% endblock reject_button %}

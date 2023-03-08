@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="main_div">
+        <h1>Instructions</h1>
+
+        <hr>
+
+        <div id = "One">
+
+        <p>In this experiment, you will be shown a series of pictures like the one below. Your task is to guess the number of BLUE circles minus the number of YELLOW circles. You will enter your answer using a slider. If you thought there were 2 more BLUE circles then YELLOW circles, you would answer “2”. Whereas, if you thought there were 4 fewer BLUE circles than YELLOW circles, you would answer “-4”. 
+
+        You will only be given XXXX seconds to view each picture, so make sure you are ready before beginning each question.
+
+        <center><img src = "/static/images/Example.png" width="749px" height="434px"></center>
+
+        </p>
+
+        </div>
+
+        <div id = "Two" style = "display:none;">
+
+        <p>For example, here there are 8 BLUE circles and 6 YELLOW circles, so the correct answer is “2”. 
+
+        You do not need to be precise to get the question correct. Your answer will be counted as correct if it is within +1 or -1 of the correct answer. Here, answering 1, 2 or 3 would be marked as a correct answer. 
+
+        <center><img src = "/static/images/Example.png" width="749px" height="434px"></center>
+        </p>
+
+        </div>
+
+        <div id = "Three" style = "display:none;">
+
+        <p>You will complete the experiment in a pair with another participant. You will either be <strong>player A</strong> or <strong>player B</strong>.</p>
+
+        <p>On each question, player A answers first, then player B answers. Player A’s task will be easier than player B’s task, but the correct answer will be the same for both players. This is done by increasing the average number of circles on screen at a time for player B.</p>
+
+        <p>On the next page, you will see examples of Player A questions and a Player B questions.</p>
+
+        </div>    
+
+        <hr>
+
+        <div class = "row">
+            <div class = "col-md-2">
+                <button id = "Back" type="button" class="btn btn-success btn-lg" onClick="backButton();">
+                Back</button>
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2"> 
+                <button id = "Next" type="button" class="btn btn-success btn-lg" onClick="nextButton();">
+                Next</button>                                                                            
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        dallinger.createParticipant();
+    </script>
+{% endblock %}
+
+{% block libs %}
+{{ super() }}
+<script src="/static/scripts/instructions.js" type="text/javascript"> </script>
+{% endblock %}

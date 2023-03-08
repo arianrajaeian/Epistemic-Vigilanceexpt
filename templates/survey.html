@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="main_div">
+        <h1>Submission form</h1>
+        <hr>
+
+	    <p>Thank you, all done. Your input has been saved. Once you finish the experiment and submit your responses, you will automatically receive your payment.</p>
+
+	    <p><strong>Please ensure that you click continue below once you are finshed otherwise your response may not be recorded.</strong></p>
+
+	    <p>The aim of this study was something.</p>
+
+        </hr>
+    </div>
+    <div class="main_div">
+    	       <form>
+            	{% block replace_questions %}
+	                {% block questions %}
+	                {% endblock %}
+	                <div class="row question">
+	                    <div class="col-md-8">
+	                        On a scale of 1-10 (where 10 is perfectly understood), how would you rate your understanding of how the game worked?
+	                    </div>
+	                    <div class="col-md-4">
+	                        <select id="understanding" name="understanding">
+	                            <option value="10">10 - Perfectly understood</option>
+	                            <option value="9">9</option>
+	                            <option value="8">8</option>
+	                            <option value="7">7</option>
+	                            <option value="6">6</option>
+	                            <option value="5" SELECTED>5 - Mostly Understood</option>
+	                            <option value="4">4</option>
+	                            <option value="3">3</option>
+	                            <option value="2">2</option>
+	                            <option value="1">1 - Did not understand at all</option>
+	                        </select>
+	                    </div>
+	                </div>
+			<div class="row question">
+                            <div class="col-md-4">
+  			       What is your age? (years) 
+  			                </div>
+  			                <div class = "col-md-8">
+                               <input type="number" name="Age" min="1" max="100">
+                            </div>
+            </div>
+
+			<div class="row question">
+				<div class="col-md-4">
+                            	What is your gender?
+                            </div>
+                            <div class = "col-md-8">
+                              <textarea class="form-control" rows="1" name="Gender"></textarea>
+                            </div>
+			</div>
+                            
+            <div class="row question">
+            	<div class="col-md-4">Which of the following ethnic origins best describes you?</div>
+            	<div class="col-md-8">
+            		<select id="Ethnicity" name="Ethnicity">
+	                        	<option value = "Prefer not to say">Prefer not to say</option>
+	                        	<option value = "White">White</option>
+	                        	<option value = "English / Welsh / Scottish / Northern Irish / British">English / Welsh / Scottish / Northern Irish / British</option>
+	                        	<option value = "Irish">Irish</option>
+	                        	<option value = "Gypsy or Irish Traveller">Gypsy or Irish Traveller</option>
+	                        	<option value = "White and Asian">White and Asian</option>
+	                        	<option value = "White and Black Carribean">White and Black Carribean</option>
+	                        	<option value = "White and Black African">White and Black African</option>
+	                        	<option value = "Black">Black</option>
+	                        	<option value = "African">African</option>
+	                        	<option value = "Carribean">Carribean</option>                               
+	                        	<option value = "Arab">Arab</option>
+	                        	<option value = "Indian">Indian</option>
+	                        	<option value = "Pakistani">Pakistani</option>
+	                        	<option value = "Bangladeshi">Bangladeshi</option>
+	                        	<option value = "Chinese">Chinese</option>
+	                        	<option value = "Other">A different ethnicity not listed here (please describe below if you wish)</option>
+	                        </select>
+            	</div>
+            </div>
+	            <div class="row question">
+	            	<div class="col-md-4">
+                            	Please describe your ethnicity if it is not included in the list above
+                            </div>
+                            <div class = "col-md-8">
+                              <textarea class="form-control" rows="1" name="Free"></textarea>
+                            </div>
+	            </div>
+	            {% endblock %}
+            </form>
+    </div>
+
+        <hr>
+        <div class="instructionsnav">
+        	            <div class="row">
+            	<div class="col-md-9">
+                </div>
+                <div class="col-md-3">
+                    <button type="button" id="submit-questionnaire" class="btn btn-primary btn-lg continue">Continue</button>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#submit-questionnaire").click(function() {
+        dallinger.submitQuestionnaire();
+      });
+    });
+  </script>
+{% endblock %}

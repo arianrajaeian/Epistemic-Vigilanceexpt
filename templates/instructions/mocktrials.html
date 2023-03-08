@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="main_div">
+        <h1 id = "Main_header">Practice questions</h1>
+
+        <hr>
+
+        <h4 id = "Small_header">You are about to see an example of a player A question. When you are ready, click the button below to reveal the image.</h4>
+
+        <div id = "answer_div" style = "display:none">
+
+        <hr>
+
+        <h4 id = "Answer"> </h4>
+        <h4 id = "Feedback"> </h4>
+
+        </div>
+
+        <div id = "stimulus_div" style = "display:none;">
+           <div class="trial_text" id="stimulus_div" style="height: 430px;">
+             <img id="stimulus" class="stimulus_image" src="" width="500px"/>
+           </div>            
+        </div>
+    <div class = "row" id = "Slider" style = "display:none;">
+       <div class = "col-md-12 text-center">
+            <div class = "slidecontainer">
+                <label>Indicate your guess using the slider.</label>
+                <input id="Guessslider" type="text" class="js-range-slider" name="my_range" value=""data-min="-10"
+                data-max="10"
+                data-from="0">
+            </div>
+        </div>
+    </div>       
+    </div>
+
+    <div class = "row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3"> 
+            <button id = "Next" type="button" class="btn btn-success btn-lg" onClick="continueTrial();">
+            Continue</button> 
+            <button id = "Submit" type="button" class="btn btn-success btn-lg" style = "display:none" onClick="submitAnswer(guessSlider.prop('value'));">
+            Submit answer</button>  
+            <button type="button" class="btn btn-success btn-lg" onClick="dallinger.goToPage('instructions/Instructions_2');">
+            SKIP</button>                                                                                                           
+        </div>
+    </div>  
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var guessSlider= $("#Guessslider");
+    $("#Guessslider").ionRangeSlider({
+    skin: "big",
+     });
+    Questions = 1 
+</script>
+{% endblock %}
+
+{% block libs %}
+{{ super() }}
+<script src="/static/scripts/instructions.js" type="text/javascript"> </script>
+{% endblock %}
