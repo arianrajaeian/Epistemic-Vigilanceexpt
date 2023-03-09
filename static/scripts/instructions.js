@@ -156,8 +156,10 @@ function allowGuess(){
 
 function submitAnswer(answer){
     $("#Small_header").hide();
+    $('#Submit').prop('disabled', true);    
     $("#Submit").hide();
     $("#Slider").hide();
+    $('#Guessslider').data('ionRangeSlider').reset();
     $("#Next").show();
     $("#Answer").html("The correct answer was: " + excess)
     if(Math.abs(answer - excess) <= 1){

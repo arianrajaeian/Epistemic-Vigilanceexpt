@@ -70,7 +70,15 @@ class Drone(Node):
 
     @condition.setter
     def condition(self,val):
-        self.property2 = val    
+        self.property2 = val
+
+    @property
+    def score(self):
+        return self.property3
+
+    @score.setter
+    def score(self,val):
+        self.property3 = val    
 
 class Probe(Node):
     """Node used for player B in the experiment"""
@@ -115,10 +123,16 @@ class Probe(Node):
     def condition(self,val):
         self.property2 = val
 
+    @property
+    def score(self):
+        return self.property3
+
+    @score.setter
+    def score(self,val):
+        self.property3 = val    
 
 class Answer_Info(Info):
     """Info used to record whether the players got the answer correct or incorrect"""
-
     __mapper_args__ = {"polymorphic_identity": "Answer_Info"}
 
 class First_guess(Info):

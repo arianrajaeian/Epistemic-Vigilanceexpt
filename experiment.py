@@ -1,4 +1,4 @@
-"""An experiment testing episemtic vigilance has a hypothesis to explain egocentric discounting"""
+"""An experiment testing epistemic vigilance has a hypothesis to explain egocentric discounting"""
 
 import logging
 from dallinger.config import get_config
@@ -105,10 +105,72 @@ class Epivigi(Experiment):
             Drone.transmit(what = self.models.JSON_Info)
             node.receive()
 
-    def bonus(self, participant):
-        """Calculate the participants bonus."""
-        node = participant.nodes()[0]
-        return 3    
+    def data_check(self, participant):
+        """This function runs when a participant completes the experiment. Here, we manually award the bonuses to player A and B, if the player is B"""
+        my_node = participant.nodes()[0]
+        self.log(my_node)   
+        if my_node.type == "Probe_node":
+            their_node = my_node.neighbors(direction = "from")[0]
+            self.log(their_node)  
+            their_participant = their_node.participant
+            self.log(their_participant)
+            my_score = sum(1 for info in my_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
+            their_score = sum(1 for info in their_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
+            total_bonus = (my_score + their_score) * 0.10
+            self.log(total_bonus)
+
+            if my_node.network.condition == "Fully_comp":
+                if my_score > their_score:
+                    my_bonus = total_bonus
+                    their_bonus = 0
+                elif their_score > my_score:
+                    my_bonus = 0
+                    their_bonus = total_bonus
+                else: # They scored the same, so split the bonus
+                    my_bonus = total_bonus / 2
+                    their_bonus = total_bonus / 2
+
+            elif my_node.network.condition == "Hybrid":
+                percentage_of_bonus = total_bonus * 0.25
+                remaining_bonus = total_bonus - percentage_of_bonus
+                if my_score > their_score:
+                    my_bonus = percentage_of_bonus + (remaining_bonus / 2)
+                    their_bonus = remaining_bonus / 2
+                elif their_score > my_score:
+                    my_bonus = remaining_bonus / 2
+                    their_bonus = percentage_of_bonus + (remaining_bonus / 2)
+                else:
+                    my_bonus = total_bonus / 2
+                    their_bonus = total_bonus / 2
+
+            else: # It is the cooperative condition
+                my_bonus = total_bonus / 2
+                their_bonus = total_bonus / 2
+
+            my_bonus = round(my_bonus,2)
+            their_bonus = round(their_bonus,2)
+
+            # bonus to me
+            self.log("Bonus = {}: paying bonus".format(my_bonus))
+            participant.recruiter.reward_bonus(
+                participant,
+                my_bonus,
+                self.bonus_reason(),
+                )
+
+            # bonus to them
+            self.log("Bonus = {}: paying bonus".format(their_bonus))
+            their_participant.recruiter.reward_bonus(
+                their_participant,
+                their_bonus,
+                self.bonus_reason(),
+                )            
+        return True # Note, the function must return TRUE. Otherwise the participant's data will get rejected.
+
+    #def bonus(self, participant):
+       # """Calculate the participants bonus."""
+       # node = participant.nodes()[0]
+       # return 3    
 
     def recruit(self):
         """Recruit runs automatically when a participant finishes and will ask it to run when a participant fails too.
@@ -118,14 +180,14 @@ class Epivigi(Experiment):
         else:
             self.recruiter.close_recruitment()
 
-    def award_bonus(self, bonus):
-        self.log("Bonus = {}: paying bonus".format(bonus))
-        self.participant.recruiter.reward_bonus(
-            self.participant,
-            bonus,
-            self.experiment.bonus_reason(),
-        )
-    participant.recruiter.reward_bonus()
+   # def award_bonus(self, bonus):
+      #  self.log("Bonus = {}: paying bonus".format(bonus))
+      #  self.participant.recruiter.reward_bonus(
+          #  self.participant,
+           # bonus,
+          #  self.experiment.bonus_reason(),
+       # )
+   # participant.recruiter.reward_bonus()
 
     @property
     def background_tasks(self):

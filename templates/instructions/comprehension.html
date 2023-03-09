@@ -9,58 +9,74 @@
         <p>To check your understanding of the experiment, please answer the following questions. Make sure to check your answers carefully before clicking "continue". You will only get one chance to 
         correct your answers before you are removed from the experiment.</p>
 
-            <div class = "row">
+        <div class = "row">
                 <div class = "col-md-12 text-center">
                     <h4>Player A's task is easier than player B's task?</h4>
-                    <h5 id = "Task"><b style="font-weight: bold;">...</b></h5>
+                    <h5 id = "Task"><b>...</b></h5>
                 </div>
-            </div>
-            <div class = "row">
-                <div class = "col-md-6 text-center">
+        </div>
+
+        <div class = "row">
+                <div class = "col-md-3 text-center"></div>
+                <div class = "col-md-3 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Task', 'True')">TRUE</button>
                 </div>
-                <div class = "col-md-6 text-center">
+                <div class = "col-md-3 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Task', 'False')">FALSE</button>
                 </div>
-            </div> 
+                <div class = "col-md-3 text-center"></div>
+        </div> 
 
-            <div class = "row">
+        <br>
+
+        <div class = "row">
                 <div class = "col-md-12 text-center">
                     <h4>The answer for player A is the same as the answer for player B for each question?</h4>
-                    <h5 id = "Answer"><b style="font-weight: bold;">...</b></h5>
+                    <h5 id = "Answer"><b>...</b></h5>
                 </div>
-            </div>
-            <div class = "row">
-                <div class = "col-md-6 text-center">
+        </div>
+
+        <div class = "row">
+                <div class = "col-md-3 text-center"></div>
+                <div class = "col-md-3 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Answer', 'True')">TRUE</button>
                 </div>
-                <div class = "col-md-6 text-center">
+                <div class = "col-md-3 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Answer', 'False')">FALSE</button>
                 </div>
-            </div> 
+                <div class = "col-md-3 text-center"></div>
+        </div> 
 
-            <div class = "row">
+        <br>
+
+        <div class = "row">
                 <div class = "col-md-12 text-center">
                     <h4>The advice left by player A may not be what they actually answered?</h4>
-                    <h5 id = "Advice"><b style="font-weight: bold;">...</b></h5>
+                    <h5 id = "Advice"><b>...</b></h4>
                 </div>
-            </div>
-            <div class = "row">
-                <div class = "col-md-6 text-center">
+        </div>
+
+        <div class = "row">
+                <div class = "col-md-3 text-center"></div>
+                <div class = "col-md-3 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Advice', 'True')">TRUE</button>
                 </div>
-                <div class = "col-md-6 text-center">
+                <div class = "col-md-3 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Advice', 'False')">FALSE</button>
                 </div>
-            </div>
+                <div class = "col-md-3 text-center"></div>
+        </div>
 
-            <div class = "row">
+        <br>
+
+        <div class = "row">
                 <div class = "col-md-12 text-center">
                     <h4>How is the bonus payment split at the end of the game?</h4>
-                    <h5 id = "Bonus"><b style="font-weight: bold;">...</b></h5>
+                    <h5 id = "Bonus"><b>...</b></h5>
                 </div>
-            </div>
-            <div class = "row">
+        </div>
+
+        <div class = "row">
                 <div class = "col-md-4 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Bonus', 'It is split evenly between both players.')">Evenly</button>
                 </div>
@@ -70,7 +86,9 @@
                 <div class = "col-md-4 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Bonus', 'The most successful player gets all of the bonus.')">All to the most successful player</button>
                 </div>
-            </div>
+        </div>
+
+        <br>
 
         <h4 id = "warning" style = "display:none;color:red">One or more of your answers was incorrect. Check your answers carefully and try again. </h4>                                     
 
@@ -79,9 +97,8 @@
         <div class = "row">
             <div class="col-md-10"></div>
             <div class="col-md-2"> 
-                <button type="button" class="btn btn-success btn-lg" onClick="attemptAdvance();">
-                Continue</button>                                                                                              
-            </div>
+             <button type="button" class="btn btn-success btn-lg" onClick="attemptAdvance();">Continue</button>
+             </div>
         </div>        
     </div>
 {% endblock %}

@@ -13,7 +13,7 @@
         <hr>
 
         <h4 id = "Answer"> </h4>
-        <h4 id = "Advice"> </h4>
+        <h4 id = "Advice">The advice that player B will see for this question is: 0</h4>
 
         </div>
 
@@ -27,6 +27,8 @@
 
         </div>
 
+        <br>
+
         <div id = "stimulus_div" style = "display:none;">
            <div class="trial_text" id="stimulus_div" style="height: 430px;">
              <img id="stimulus" class="stimulus_image" src="" width="500px"/>
@@ -35,7 +37,8 @@
     <div class = "row" id = "Slider" style = "display:none;">
        <div class = "col-md-12 text-center">
             <div class = "slidecontainer">
-                <input id="answerslider" type="text" class="js-range-slider" name="my_range" value=""data-min="-10"
+                <label>Indicate your guess using the slider.</label>
+                <input id="Guessslider" type="text" class="js-range-slider" name="my_range" value=""data-min="-10"
                 data-max="10"
                 data-from="0">
             </div>
@@ -53,10 +56,7 @@
                 <button type="button" class="btn btn-info btn-lg" onClick="displaySpy();">Spy</button>                 
             </div>            
         </div> 
-        <div class = "row">
-            <div class="col-md-12"></div>
-                <p> </p>
-        </div> 
+        <br>
     </div>        
 
     <div class = "row">
@@ -64,11 +64,11 @@
         <div class="col-md-3"> 
             <button id = "Next" type="button" class="btn btn-success btn-lg" onClick="continueTrial();">
             Continue</button> 
-            <button id = "Submit_answer" type="button" class="btn btn-success btn-lg" style = "display:none" onClick="submitAnswer(guessSlider.prop('value'));">
+            <button id = "Submit_answer" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitAnswer(guessSlider.prop('value'));">
             Submit answer</button>
-            <button id = "Submit_advice" type="button" class="btn btn-success btn-lg" style = "display:none" onClick="submitAdvice(guessSlider.prop('value'));">
+            <button id = "Submit_advice" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitAdvice(guessSlider.prop('value'));">
             Submit advice</button>
-            <button id = "Submit_revision" type="button" class="btn btn-success btn-lg" style = "display:none" onClick="submitRevision(guessSlider.prop('value'));">
+            <button id = "Submit_revision" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitRevision(guessSlider.prop('value'));">
             Submit answer</button>                                                                                                                        
         </div>
     </div>         
@@ -81,12 +81,14 @@
         getInfo();
         tickClock(); 
       });
-    var guessSlider= $("#answerslider");
-    $("#answerslider").ionRangeSlider({
-    skin: "big",
-     });
-       guessSlider.on("change", function(){
-          updatePoints(guessSlider.prop('value'));
-       });          
+    var guessSlider = $('#Guessslider').ionRangeSlider({
+        skin: "big",
+        onFinish: function(data){
+            enableButtons();
+        },
+        onChange: function(data){
+          updatePoints(guessSlider.prop('value'));  
+        }
+    });        
     </script>
 {% endblock %}

@@ -52,31 +52,32 @@ function extractInfo(){
     return Promise.resolve();
 }
 
-async function continueTrial(){
-    if ($('#feedback_div').is(':visible') || $('#Info_div').is(':visible')){
-        $("#feedback_div").hide();
-        $("#Info_div").hide();
-        $("#Next").show(); 
-        $("#Small_header").html("When you are ready to continue, click the button below.");
-    } else {
-        if(Questions > numQuestions){
-            dallinger.createInfo(node_id,{
-                contents: "End",
-                info_type: 'Finished'
-                }).done(function(resp){
-                    dallinger.goToPage('survey')
-                })                    
-        }
-        if(Player == "B"){
-            await extractInfo();
-        }
-        resetTimer();
-        $("#Main_header").html("Question " + Questions + " / " + numQuestions);          
-        $("#Small_header").hide();
-        $("#Next").hide();        
-        generateDots(transmitted_blueDots, transmitted_yellowDots);
-        presentDisplay();
-    } 
+async function continueTrial() {
+  if ($('#feedback_div').is(':visible') || $('#Info_div').is(':visible')) {
+    $("#feedback_div").hide();
+    $("#Info_div").hide();
+    $("#Next").show(); 
+    $("#Small_header").html("When you are ready to continue, click the button below.");
+  } else {
+    if (Questions > numQuestions) {
+      dallinger.createInfo(node_id, {
+        contents: "End",
+        info_type: 'Finished'
+      }).done(function(resp) {
+        dallinger.goToPage('survey')
+      });                  
+    } else { 
+      if (Player == "B") {
+        await extractInfo();
+      }
+      resetTimer();
+      $("#Main_header").html("Question " + Questions + " / " + numQuestions);          
+      $("#Small_header").hide();
+      $("#Next").hide();        
+      generateDots(transmitted_blueDots, transmitted_yellowDots);
+      presentDisplay();
+    }         
+  }   
 }
 
 function shuffle(o){
@@ -185,6 +186,8 @@ function allowGuess(){
 }
 
 function submitAnswer(answer){
+    $('#Guessslider').data('ionRangeSlider').reset();
+    disableButtons();
     $("#Submit_answer").hide();
     if(Player == "A"){
         adviceDiv(answer);
@@ -195,6 +198,7 @@ function submitAnswer(answer){
 
 function adviceDiv(answer){
     // Show the information for player A
+    $("#Advice").html("The advice that player B will see for this question is: 0");
     $("#Submit_advice").show();
     $("#feedback_div").show(); 
     $("#Small_header").html("What advice would you like to leave for player B?");
@@ -269,7 +273,9 @@ function displayChoice(){
 
 function submitAdvice(advice){
     // Only runs for player A
+    $('#Guessslider').data('ionRangeSlider').reset();
     Advice = advice
+    disableButtons();
     createJSONInfo();
     $("#Slider").hide();
     $("#Submit_advice").hide();
@@ -278,7 +284,9 @@ function submitAdvice(advice){
 }
 
 function submitRevision(revision){
+    $('#Guessslider').data('ionRangeSlider').reset();
     $("#button_div").hide();
+    disableButtons();
     // Only runs for player B
     resps = {
         "Question" : Questions,
@@ -338,4 +346,16 @@ function updatePoints(value) {
   // Code for slider to update text displayed
   value = parseInt(value);
   $("#Advice").html("The advice that player B will see for this question is: " + value);
+}
+
+function disableButtons(){
+    $('#Submit_answer').prop('disabled', true); 
+    $('#Submit_advice').prop('disabled', true); 
+    $('#Submit_revision').prop('disabled', true); 
+}
+
+function enableButtons(){
+    $('#Submit_answer').prop('disabled', false);
+    $('#Submit_advice').prop('disabled', false);
+    $('#Submit_revision').prop('disabled', false);      
 }

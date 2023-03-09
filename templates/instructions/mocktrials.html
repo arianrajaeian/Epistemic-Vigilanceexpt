@@ -39,8 +39,7 @@
         <div class="col-md-3"> 
             <button id = "Next" type="button" class="btn btn-success btn-lg" onClick="continueTrial();">
             Continue</button> 
-            <button id = "Submit" type="button" class="btn btn-success btn-lg" style = "display:none" onClick="submitAnswer(guessSlider.prop('value'));">
-            Submit answer</button>  
+            <button id="Submit" type="button" class="btn btn-success btn-lg" style="display:none" disabled onClick="submitAnswer(guessSlider.prop('value'))">Submit answer</button>
             <button type="button" class="btn btn-success btn-lg" onClick="dallinger.goToPage('instructions/Instructions_2');">
             SKIP</button>                                                                                                           
         </div>
@@ -49,10 +48,12 @@
 
 {% block scripts %}
 <script>
-    var guessSlider= $("#Guessslider");
-    $("#Guessslider").ionRangeSlider({
-    skin: "big",
-     });
+    var guessSlider = $('#Guessslider').ionRangeSlider({
+        skin: "big",
+        onFinish: function(data){
+           $('#Submit').prop('disabled', false); 
+        }
+    }); 
     Questions = 1 
 </script>
 {% endblock %}
