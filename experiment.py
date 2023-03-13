@@ -45,12 +45,6 @@ class Epivigi(Experiment):
         if session:
             self.setup()
 
-    def setup(self):
-        """Setup the networks."""
-        """Runs only if there are no networks."""
-        if not self.networks():
-            super(Epivigi, self).setup()
-
     def create_network(self):
         """Return a new network."""
         network = self.models.RChain(max_size = 2)
