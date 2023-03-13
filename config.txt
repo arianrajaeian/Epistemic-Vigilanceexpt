@@ -4,24 +4,24 @@ auto_recruit = true
 webdriver_type = chrome_headless
 
 [MTurk]
-title = War of the Ghosts
-description = Read a brief story and answer some questions about it.
-keywords = Psychology, reading, text
+title = Experiment title goes here.
+description = Estimate differences in the number of dots while learning from others
+keywords = Psychology, numerosity, copying, social learning
 base_payment = 1.00
 lifetime = 24
 duration = 0.1
 us_only = true
 approve_requirement = 95
-contact_email_on_error = bartlett1932@mailinator.com
-ad_group = War of the Ghosts
-organization_name = Monsters University
+contact_email_on_error = robin's email
+ad_group = EpistemicVigilance
+organization_name = Arizona State University
 browser_exclude_rule = MSIE, mobile, tablet
 
 [Database]
-database_url = postgresql://postgres@localhost/dallinger
+database_url = postgresql://postgres@localhost/dallinger # I'm not sure about this line, look at the docs
 database_size = standard-0
 
-[Server]
+[Server] # this will need configuring later
 dyno_type = hobby
 num_dynos_web = 1
 num_dynos_worker = 1
@@ -31,4 +31,4 @@ clock_on = false
 logfile = -
 
 [Docker]
-docker_image_base_name = ghcr.io/dallinger/dallinger/bartlett1932
+docker_image_base_name = ghcr.io/dallinger/dallinger/bartlett1932 # again look at the docs.
