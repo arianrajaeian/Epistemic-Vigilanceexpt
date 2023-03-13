@@ -74,7 +74,7 @@ class Epivigi(Experiment):
                 # Signal that the network is finished. For the benefit of experiment_ongoing
                 node.network.finished = "Yes"
 
-    def vector_get_request(self, node, vectors):
+    def vector_get_request(self, node, vectors):  # why this function?
         """Runs when a participant fails the comprehension check"""
         node.fail()
         node.network.calculate_full()
