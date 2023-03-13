@@ -77,7 +77,7 @@ class Epivigi(Experiment):
     def vector_get_request(self, node, vectors):  # why this function?
         """Runs when a participant fails the comprehension check"""
         node.fail()
-        node.network.calculate_full()
+        node.network.calculate_full() # is this necessary?
         self.save()
         self.recruit()
 
