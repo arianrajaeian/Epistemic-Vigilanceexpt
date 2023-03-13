@@ -57,8 +57,8 @@ class Epivigi(Experiment):
             return None
         networks = self.networks(full=False)
         if networks:
-            lowest_nodes = min([len(n.nodes()) for n in networks]) # Find the lowest number of nodes
-            available_networks = [n for n in networks if len(n.nodes()) == lowest_nodes] # Create a list of networks with the lowest number of nodes
+            lowest_nodes = min([n.size() for n in networks]) # Find the lowest number of nodes
+            available_networks = [n for n in networks if n.size() == lowest_nodes] # Create a list of networks with the lowest number of nodes
             return random.choice(available_networks) # Select one at random and put the participant in it
         else:
             return None
