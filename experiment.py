@@ -125,7 +125,7 @@ class Epivigi(Experiment):
                     their_bonus = total_bonus / 2
 
             elif my_node.network.condition == "Hybrid":
-                percentage_of_bonus = total_bonus * 0.25
+                percentage_of_bonus = total_bonus * 0.25 # why 25%?
                 remaining_bonus = total_bonus - percentage_of_bonus
                 if my_score > their_score:
                     my_bonus = percentage_of_bonus + (remaining_bonus / 2)
