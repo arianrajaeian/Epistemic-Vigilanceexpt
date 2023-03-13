@@ -113,33 +113,25 @@ class Epivigi(Experiment):
             total_bonus = (my_score + their_score) * 0.10
             self.log(total_bonus)
 
-            if my_node.network.condition == "Fully_comp":
+            if my_node.network.condition == "Cooperative" or my_score == their_score:
+                my_bonus = total_bonus / 2
+                their_bonus = total_bonus / 2
+            elif my_node.network.condition == "Fully_comp":
                 if my_score > their_score:
                     my_bonus = total_bonus
                     their_bonus = 0
-                elif their_score > my_score:
+                else:
                     my_bonus = 0
                     their_bonus = total_bonus
-                else: # They scored the same, so split the bonus
-                    my_bonus = total_bonus / 2
-                    their_bonus = total_bonus / 2
-
             elif my_node.network.condition == "Hybrid":
                 percentage_of_bonus = total_bonus * 0.25 # why 25%?
                 remaining_bonus = total_bonus - percentage_of_bonus
                 if my_score > their_score:
                     my_bonus = percentage_of_bonus + (remaining_bonus / 2)
                     their_bonus = remaining_bonus / 2
-                elif their_score > my_score:
+                else:
                     my_bonus = remaining_bonus / 2
                     their_bonus = percentage_of_bonus + (remaining_bonus / 2)
-                else:
-                    my_bonus = total_bonus / 2
-                    their_bonus = total_bonus / 2
-
-            else: # It is the cooperative condition
-                my_bonus = total_bonus / 2
-                their_bonus = total_bonus / 2
 
             my_bonus = round(my_bonus,2)
             their_bonus = round(their_bonus,2)
