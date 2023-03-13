@@ -49,7 +49,7 @@ class Epivigi(Experiment):
         """Return a new network."""
         network = self.models.RChain(max_size = 2)
         network.condition = random.choice(conditions)
-        network.finished = "No"
+        network.finished = "No" # kinda risky
         return network
 
     def get_network_for_participant(self, participant):
