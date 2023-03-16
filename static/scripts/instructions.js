@@ -199,7 +199,7 @@ function displayPage(){
     } else if (condition == "Fully_comp"){
         $("#Bonus").html("The player who got the most questions right will receive the bonus fund.")
     } else {
-        $("#Bonus").html("The player who got the most questions right will receive 25% of the bonus fund. In addition, the remainder of the bonus fund will be split evenly between both players.")
+        $("#Bonus").html("The player who got the most questions right will receive 50% of the bonus fund. In addition, the remainder of the bonus fund will be split evenly between both players.")
     }
 }
 
