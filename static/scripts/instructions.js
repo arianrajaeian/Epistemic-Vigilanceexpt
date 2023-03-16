@@ -230,6 +230,7 @@ function determineCondition(){
     } else {
        correctCondition = "The most successful player gets most of it, but the other player still gets some." 
     }
+    my_node_id = dallinger.storage.get("my_node_id");
 }
 
 function pingButton(type, response){
@@ -246,7 +247,22 @@ function pingButton(type, response){
 
 function attemptAdvance(){
     if($("#Task").text() == "True" && $("#Answer").text() == "True" && $("#Advice").text() == "True" && $("#Bonus").text() == correctCondition){
-        dallinger.goToPage("experiment");  
+        if(questionAttempts == 0){
+        dallinger.createInfo(my_node_id ,{
+            contents: "First Try",
+            info_type: 'Comp_info'
+        }).done(function(resp){
+            dallinger.goToPage("experiment");
+        })          
+        }
+        if(questionAttempts == 1){
+        dallinger.createInfo(my_node_id ,{
+            contents: "Second Try",
+            info_type: 'Comp_info'
+        }).done(function(resp){
+            dallinger.goToPage("experiment");
+        })          
+        }                    
     } else {
         if(questionAttempts == 0){
             questionAttempts = 1;

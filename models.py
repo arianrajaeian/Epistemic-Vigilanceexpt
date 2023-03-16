@@ -93,6 +93,10 @@ class Answer_Info(Info):
     """Info used to record whether the players got the answer correct or incorrect"""
     __mapper_args__ = {"polymorphic_identity": "Answer_Info"}
 
+class Comp_Info(Info):
+    """Info used to record how many tries participants took to get the comprehension check correct."""
+    __mapper_args__ = {"polymorphic_identity": "Comp_Info"}
+
 class First_guess(Info):
     """Info used for player B making their first guess"""
 

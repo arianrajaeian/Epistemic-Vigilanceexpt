@@ -30,7 +30,7 @@ class Epivigi(Experiment):
         self.models = models
         self.experiment_repeats = 1 # How many networks?
         self.initial_recruitment_size = 1
-        self.inactivity_time_limit = 360 # How long before a node is failed and the participant replaced
+        self.inactivity_time_limit = 15 # How long before a node is failed and the participant replaced
         self.known_classes = {
             "Drone" : models.Drone,
             "Probe" : models.Probe,
@@ -39,6 +39,7 @@ class Epivigi(Experiment):
             "First_guess" : models.First_guess,
             "Second_guess" : models.Second_guess,
             "Social_info" : models.Social_info,
+            "Comp_info" : models.Comp_Info,
             "Finished" : models.Finished,
         }
 
@@ -49,7 +50,7 @@ class Epivigi(Experiment):
         """Return a new network."""
         network = self.models.RChain(max_size = 2)
         network.condition = random.choice(conditions)
-        network.finished = "No" # kinda risky
+        network.finished = "No" # I tried changing these to True and False. It seems to store them in the table as false and true though, which means things like "not n.finished" don't work properly. I have left as yes / no for now.
         return network
 
     def get_network_for_participant(self, participant):
@@ -73,13 +74,12 @@ class Epivigi(Experiment):
             if node.type == "Probe_node":
                 # Signal that the network is finished. For the benefit of experiment_ongoing
                 node.network.finished = "Yes"
-
-    def vector_get_request(self, node, vectors):  # why this function?
-        """Runs when a participant fails the comprehension check"""
-        node.fail()
-        node.network.calculate_full() # is this necessary?
-        self.save()
-        self.recruit()
+        if info.type == "Comp_Info":
+            if info.contents == "Failed":
+                node.fail()
+                node.network.calculate_full()
+                self.save()
+                self.recruit()     
 
     def create_node(self, participant, network):
         """Create a Node for the participant. Varies based on whether the network already has a player A"""
@@ -153,11 +153,6 @@ class Epivigi(Experiment):
                 )            
         return True # Note, the function must return TRUE. Otherwise the participant's data will get rejected.
 
-    #def bonus(self, participant):
-       # """Calculate the participants bonus."""
-       # node = participant.nodes()[0]
-       # return 3    
-
     def recruit(self):
         """Recruit runs automatically when a participant finishes and will ask it to run when a participant fails too.
         If there are still unfilled networks, we recruit another participant"""
@@ -165,15 +160,6 @@ class Epivigi(Experiment):
             self.recruiter.recruit(n=1)
         else:
             self.recruiter.close_recruitment()
-
-   # def award_bonus(self, bonus):
-      #  self.log("Bonus = {}: paying bonus".format(bonus))
-      #  self.participant.recruiter.reward_bonus(
-          #  self.participant,
-           # bonus,
-          #  self.experiment.bonus_reason(),
-       # )
-   # participant.recruiter.reward_bonus()
 
     @property
     def background_tasks(self):
@@ -188,12 +174,15 @@ class Epivigi(Experiment):
     def stiller_remover(self):
         """Remove any stillers"""
         while self.Experiment_ongoing():
+            self.log("stiller remover going")
             gevent.sleep(2)
             for net in self.started_but_unfinished_networks():
                 self.node_kicker()
+        self.log("stiller remover going away now")
 
     def node_kicker(self):
         for net in self.started_but_unfinished_networks():
+            self.log("Node kicker going")
             for n in net.nodes():
                 current_time = datetime.now()
                 if (current_time - n.last_request).total_seconds() > self.inactivity_time_limit and n.finished != "Yes":

@@ -20,8 +20,10 @@
 
 {% block scripts %}
     <script>
-        node_id = dallinger.storage.get("my_node_id");
-          dallinger.get(
-  "/node/" + node_id + "/vectors",) 
+        my_node_id = dallinger.storage.get("my_node_id")
+        dallinger.createInfo(my_node_id ,{
+            contents: "Failed the comprehension check",
+            info_type: 'Comp_info'
+        })
     </script>
 {% endblock %}
