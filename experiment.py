@@ -45,17 +45,11 @@ class Epivigi(Experiment):
         if session:
             self.setup()
 
-    def setup(self):
-        """Setup the networks."""
-        """Runs only if there are no networks."""
-        if not self.networks():
-            super(Epivigi, self).setup()
-
     def create_network(self):
         """Return a new network."""
         network = self.models.RChain(max_size = 2)
         network.condition = random.choice(conditions)
-        network.finished = "No"
+        network.finished = "No" # kinda risky
         return network
 
     def get_network_for_participant(self, participant):
@@ -63,8 +57,8 @@ class Epivigi(Experiment):
             return None
         networks = self.networks(full=False)
         if networks:
-            lowest_nodes = min([len(n.nodes()) for n in networks]) # Find the lowest number of nodes
-            available_networks = [n for n in networks if len(n.nodes()) == lowest_nodes] # Create a list of networks with the lowest number of nodes
+            lowest_nodes = min([n.size() for n in networks]) # Find the lowest number of nodes
+            available_networks = [n for n in networks if n.size() == lowest_nodes] # Create a list of networks with the lowest number of nodes
             return random.choice(available_networks) # Select one at random and put the participant in it
         else:
             return None
@@ -80,10 +74,10 @@ class Epivigi(Experiment):
                 # Signal that the network is finished. For the benefit of experiment_ongoing
                 node.network.finished = "Yes"
 
-    def vector_get_request(self, node, vectors):
+    def vector_get_request(self, node, vectors):  # why this function?
         """Runs when a participant fails the comprehension check"""
         node.fail()
-        node.network.calculate_full()
+        node.network.calculate_full() # is this necessary?
         self.save()
         self.recruit()
 
@@ -119,33 +113,25 @@ class Epivigi(Experiment):
             total_bonus = (my_score + their_score) * 0.10
             self.log(total_bonus)
 
-            if my_node.network.condition == "Fully_comp":
+            if my_node.network.condition == "Cooperative" or my_score == their_score:
+                my_bonus = total_bonus / 2
+                their_bonus = total_bonus / 2
+            elif my_node.network.condition == "Fully_comp":
                 if my_score > their_score:
                     my_bonus = total_bonus
                     their_bonus = 0
-                elif their_score > my_score:
+                else:
                     my_bonus = 0
                     their_bonus = total_bonus
-                else: # They scored the same, so split the bonus
-                    my_bonus = total_bonus / 2
-                    their_bonus = total_bonus / 2
-
             elif my_node.network.condition == "Hybrid":
-                percentage_of_bonus = total_bonus * 0.25
+                percentage_of_bonus = total_bonus * 0.25 # why 25%?
                 remaining_bonus = total_bonus - percentage_of_bonus
                 if my_score > their_score:
                     my_bonus = percentage_of_bonus + (remaining_bonus / 2)
                     their_bonus = remaining_bonus / 2
-                elif their_score > my_score:
+                else:
                     my_bonus = remaining_bonus / 2
                     their_bonus = percentage_of_bonus + (remaining_bonus / 2)
-                else:
-                    my_bonus = total_bonus / 2
-                    their_bonus = total_bonus / 2
-
-            else: # It is the cooperative condition
-                my_bonus = total_bonus / 2
-                their_bonus = total_bonus / 2
 
             my_bonus = round(my_bonus,2)
             their_bonus = round(their_bonus,2)
