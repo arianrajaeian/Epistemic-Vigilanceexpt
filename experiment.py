@@ -30,7 +30,7 @@ class Epivigi(Experiment):
         self.models = models
         self.experiment_repeats = 1 # How many networks?
         self.initial_recruitment_size = 1
-        self.inactivity_time_limit = 15 # How long before a node is failed and the participant replaced
+        self.inactivity_time_limit = 360 # How long before a node is failed and the participant replaced
         self.known_classes = {
             "Drone" : models.Drone,
             "Probe" : models.Probe,
@@ -102,16 +102,16 @@ class Epivigi(Experiment):
     def data_check(self, participant):
         """This function runs when a participant completes the experiment. Here, we manually award the bonuses to player A and B, if the player is B"""
         my_node = participant.nodes()[0]
-        self.log(my_node)   
+        #self.log(my_node)   
         if my_node.type == "Probe_node":
             their_node = my_node.neighbors(direction = "from")[0]
-            self.log(their_node)  
+            #self.log(their_node)  
             their_participant = their_node.participant
-            self.log(their_participant)
+            #self.log(their_participant)
             my_score = sum(1 for info in my_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
             their_score = sum(1 for info in their_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
             total_bonus = (my_score + their_score) * 0.10
-            self.log(total_bonus)
+            #self.log(total_bonus)
 
             if my_node.network.condition == "Cooperative" or my_score == their_score:
                 my_bonus = total_bonus / 2
@@ -174,15 +174,15 @@ class Epivigi(Experiment):
     def stiller_remover(self):
         """Remove any stillers"""
         while self.Experiment_ongoing():
-            self.log("stiller remover going")
+            #self.log("stiller remover going")
             gevent.sleep(2)
             for net in self.started_but_unfinished_networks():
                 self.node_kicker()
-        self.log("stiller remover going away now")
+        #self.log("stiller remover going away now")
 
     def node_kicker(self):
         for net in self.started_but_unfinished_networks():
-            self.log("Node kicker going")
+            #self.log("Node kicker going")
             for n in net.nodes():
                 current_time = datetime.now()
                 if (current_time - n.last_request).total_seconds() > self.inactivity_time_limit and n.finished != "Yes":
