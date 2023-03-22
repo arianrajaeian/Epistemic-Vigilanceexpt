@@ -194,5 +194,3 @@ class Epivigi(Experiment):
 
     def started_but_unfinished_networks(self):
         return [n for n in self.networks() if n.finished != "Yes"]
-=======
->>>>>>> Stashed changes
