@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 """An experiment testing epistemic vigilance has a hypothesis to explain egocentric discounting"""
 
 import logging
