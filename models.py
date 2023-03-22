@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 from dallinger.networks import Chain
 from dallinger.models import Node, Info
 import random
@@ -121,3 +122,5 @@ class Finished(Info):
     """Info used to signal that the experiment network is done."""
 
     __mapper_args__ = {"polymorphic_identity": "Finished"}
+=======
+>>>>>>> Stashed changes

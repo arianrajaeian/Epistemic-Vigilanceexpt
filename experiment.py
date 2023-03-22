@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 """An experiment testing epistemic vigilance has a hypothesis to explain egocentric discounting"""
 
 import logging
@@ -194,3 +195,5 @@ class Epivigi(Experiment):
 
     def started_but_unfinished_networks(self):
         return [n for n in self.networks() if n.finished != "Yes"]
+=======
+>>>>>>> Stashed changes
