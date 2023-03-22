@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 ///// Instructions 1 /////
 
 function backButton(){
@@ -274,15 +273,3 @@ function attemptAdvance(){
         
     }
 }
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> Stashed changes
