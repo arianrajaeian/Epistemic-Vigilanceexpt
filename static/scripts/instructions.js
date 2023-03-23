@@ -191,9 +191,9 @@ function createAgent() {
 
 function displayPage(){
     if(node_type == "Drone_node"){
-        $("#My_role").html("You will be player A in this experiment.");
+        $("#My_role").html("You will be player A in this experiment. This means you will answer each question once. After answering each question, you will leave advice for player B about what they should answer.");
     } else {
-        $("#My_role").html("You will be player B in this experiment.");
+        $("#My_role").html("You will be player B in this experiment. This means you will answer each question twice. First without receiving any information from player A, and then again after receiving information from player A.");
     }
 
     if(condition == "Cooperative"){
@@ -252,7 +252,8 @@ function attemptAdvance(){
         if(questionAttempts == 0){
         dallinger.createInfo(my_node_id ,{
             contents: "First Try",
-            info_type: 'Comp_info'
+            contents: "First try",
+            info_type: 'Comp_Info'
         }).done(function(resp){
             dallinger.goToPage("experiment");
         })          
