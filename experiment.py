@@ -39,7 +39,7 @@ class Epivigi(Experiment):
             "First_guess" : models.First_guess,
             "Second_guess" : models.Second_guess,
             "Social_info" : models.Social_info,
-            "Comp_info" : models.Comp_Info,
+            "Comp_Info" : models.Comp_Info,
             "Finished" : models.Finished,
         }
 
@@ -75,7 +75,7 @@ class Epivigi(Experiment):
                 # Signal that the network is finished. For the benefit of experiment_ongoing
                 node.network.finished = "Yes"
         if info.type == "Comp_Info":
-            if info.contents == "Failed":
+            if info.contents == "Failed the comprehension check":
                 node.fail()
                 node.network.calculate_full()
                 self.save()
