@@ -3,7 +3,7 @@ var Questions = 1
 var numQuestions = 2
 var transmitted_blueDots = 0
 var transmitted_yellowDots = 0
-var socialInfoTypes = []
+var socialInfoTypes = [] // There needs to be 5 1s and 5 0s in this array. If the array is empty, it lets participants choose 
 var time = 0 // How long have participants spent
 
 function tickClock(){
@@ -225,7 +225,7 @@ function socialDiv(answer){
     $("#Submit_revision").show();      
     $("#Small_header").html("You may now amend your guess if you wish.");
     $("#first_guess").html("Your first answer was: " + answer);  
-    SocialInfo = socialInfoTypes.splice(Math.floor(Math.random() * socialInfoTypes.length), 1)[0]; // Need to add functionality for choosing too
+    SocialInfo = socialInfoTypes.splice(Math.floor(Math.random() * socialInfoTypes.length), 1)[0];
     if(SocialInfo == 0){
         displayAdvice();
     } else if (SocialInfo == 1) {
