@@ -174,7 +174,7 @@ function presentDisplay (argument) {
         lock = false;
         paper.clear();
         allowGuess();
-    }, 3500);
+    }, 2000);
 }
 
 function allowGuess(){
