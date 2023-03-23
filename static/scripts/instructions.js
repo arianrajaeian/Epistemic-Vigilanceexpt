@@ -5,6 +5,7 @@ function backButton(){
     if ($('#Two').is(':visible')) {
         $("#One").show();
         $("#Two").hide();
+        $("#Back").hide();
     }
     if ($('#Three').is(':visible')){
         $("#Three").hide();
@@ -18,6 +19,7 @@ function nextButton(){
     if ($('#One').is(':visible')){
         $("#One").hide();
         $("#Two").show();
+        $("#Back").show();
     } else if ($('#Two').is(':visible')){
         $("#Two").hide();
         $("#Three").show();
