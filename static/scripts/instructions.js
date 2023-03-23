@@ -251,7 +251,6 @@ function attemptAdvance(){
     if($("#Task").text() == "True" && $("#Answer").text() == "True" && $("#Advice").text() == "True" && $("#Bonus").text() == correctCondition){
         if(questionAttempts == 0){
         dallinger.createInfo(my_node_id ,{
-            contents: "First Try",
             contents: "First try",
             info_type: 'Comp_Info'
         }).done(function(resp){
@@ -260,8 +259,8 @@ function attemptAdvance(){
         }
         if(questionAttempts == 1){
         dallinger.createInfo(my_node_id ,{
-            contents: "Second Try",
-            info_type: 'Comp_info'
+            contents: "Second try",
+            info_type: 'Comp_Info'
         }).done(function(resp){
             dallinger.goToPage("experiment");
         })          
