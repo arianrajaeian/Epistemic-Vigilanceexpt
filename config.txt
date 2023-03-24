@@ -4,15 +4,15 @@ auto_recruit = true
 webdriver_type = chrome_headless
 
 [MTurk]
-title = Experiment title goes here.
-description = Estimate differences in the number of dots while learning from others
+title = Psychology study
+description = Estimate differences in the number of circles while learning from others
 keywords = Psychology, numerosity, copying, social learning
 base_payment = 1.00
 lifetime = 24
 duration = 0.1
 us_only = true
 approve_requirement = 95
-contact_email_on_error = robin's email
+contact_email_on_error = robin.o.watson@outlook.com
 ad_group = EpistemicVigilance
 organization_name = Arizona State University
 browser_exclude_rule = MSIE, mobile, tablet
