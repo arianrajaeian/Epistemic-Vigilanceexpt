@@ -1,21 +1,23 @@
 {% extends "base/consent.html" %}
 
 {% block consent_text %}
+<p>This research is being conducted by Dr Thomas Morgan and Dr Robin Watson, researchers in the School of Human Evolution and Social Change at Arizona State University. We are conducting a research study to understand when and how people use different kinds of social information. </p>
 
-<p><strong>CONSENT FORM GOES HERE</strong>
+<p> During the study, you will be assigned to be either player A or player B. You will be shown a series of pictures and asked to judge whether there are more or fewer blue circles than yellow circles. Player A will be asked to leave advice for player B about what they should answer. Player B will get to see player A’s advice or their answer. The study will take around 15 minutes and you will be paid $XXXX upon completing the study and an additional bonus of up to $3 depending on your score. </p>
 
-</p>
+<p>Your participation in this study is voluntary and you may stop your participation at any time. If you choose to withdraw from the study, there will be no penalty, however you will not be paid unless you complete the study. Before the study begins, we will ask you a series of comprehension questions to check your understanding of the study. If you answer these questions incorrectly twice, you will be removed from the study and will not be paid. </p>
 
-<p><strong>Thank you for taking the time to read this Participant Information Leaflet.</strong></p>
+<p>There are no foreseeable risks or discomforts to your participation. If you are player A, your responses in this study will be shown to one other participant while the study is ongoing, but they will be anonymous. Your responses will be confidential once the study completes, and not associated with your name in any way. However, while the study is running, they will be associated with your MTurk worker id. Once the study is complete, we will replace your worker id with a random string. The results of this study may be used in reports, presentations, or publications but your name and worker id will not be used. </p>
 
+<p>If you have any questions concerning the research study, please contact the lead researcher, Robin Watson at: robin.o.watson@outlook.com. If you have any questions about your rights as a participant in this research, or if you feel you have been placed at risk, you can contact the Chair of the Human Subjects Institutional Review Board, through the ASU Office of Research Integrity and Assurance, at (480) 965-6788.</p>
+
+<p><b>To give your consent please click the “I agree” button below, otherwise please click the “No thanks” button and return the HIT on Mechanical Turk.</b></p>
 {% endblock consent_text %}
 
 {% block consent_button %}
-<button type="button" class="btn btn-primary btn-lg" id="consent" onClick="window.location='instructions/Instructions?{{query_string | safe}}';" style="float: left;">I agree (begin experiment)
-</button>
+<button type="button" class="btn btn-primary btn-lg" id="consent" onClick="window.location='instructions/Instructions?{{query_string | safe}}';" style="float: left;">I agree</button>
 {% endblock consent_button %}
             
 {% block reject_button %}
-<button type="button" class="btn btn-danger btn-lg" onClick="self.close();" style="float: right;">I do not agree (exit experiment)
-</button>
+<button type="button" class="btn btn-danger btn-lg" onClick="self.close();" style="float: right;">No thanks (Exit HIT)</button>
 {% endblock reject_button %}
