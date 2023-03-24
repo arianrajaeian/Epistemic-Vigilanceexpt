@@ -136,6 +136,10 @@ class Epivigi(Experiment):
             my_bonus = round(my_bonus,2)
             their_bonus = round(their_bonus,2)
 
+            # Record the bonus amounts as a property on the nodes
+            my_node.bonus = my_bonus
+            their_node.bonus = their_bonus
+
             # bonus to me
             self.log("Bonus = {}: paying bonus".format(my_bonus))
             participant.recruiter.reward_bonus(
