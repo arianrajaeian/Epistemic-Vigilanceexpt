@@ -72,11 +72,11 @@ class DroneProbe(Node):
         self.property2 = val
 
     @property
-    def score(self):
+    def bonus(self):
         return self.property3
 
-    @score.setter
-    def score(self,val):
+    @bonus.setter
+    def bonus(self,val):
         self.property3 = val 
 
 class Drone(DroneProbe):
