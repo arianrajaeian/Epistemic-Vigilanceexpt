@@ -1,9 +1,9 @@
 var Player
 var Questions = 1
-var numQuestions = 2
+var numQuestions = 15
 var transmitted_blueDots = 0
 var transmitted_yellowDots = 0
-var socialInfoTypes = [] // There needs to be 5 1s and 5 0s in this array. If the array is empty, it lets participants choose 
+var socialInfoTypes = [1,1,1,1,1,0,0,0,0,0] // There needs to be 5 1s and 5 0s in this array. If the array is empty, it lets participants choose 
 var time = 0 // How long have participants spent
 
 function tickClock(){
