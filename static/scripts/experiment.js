@@ -239,7 +239,7 @@ function socialDiv(answer){
 function displayAdvice(){
     $("#button_div").hide();    
     $("#extra_info").hide();
-    $("#Social_info").html("The advice player A left for this question was: " + A_advice);
+    $("#Social_info").html("<strong>The advice</strong> player A left for this question was: " + A_advice);
     resps = {
         "Question" : Questions,
         "Type" : "Advice",
@@ -254,7 +254,7 @@ function displayAdvice(){
 function displaySpy(){
     $("#button_div").hide();
     $("#extra_info").hide();
-    $("#Social_info").html("You spied on player A and the answer they selected for this question was: " + A_answer);
+    $("#Social_info").html("<strong>You spied</strong> on player A and the answer they selected for this question was: " + A_answer);
     resps = {
         "Question" : Questions,
         "Type" : "Spied",
