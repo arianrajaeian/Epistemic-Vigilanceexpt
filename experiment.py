@@ -99,7 +99,7 @@ class Epivigi(Experiment):
             Drone.transmit(what = self.models.JSON_Info)
             node.receive()
 
-    def data_check(self, participant):
+    def bonus(self, participant):
         """This function runs when a participant completes the experiment. Here, we manually award the bonuses to player A and B, if the player is B"""
         my_node = participant.nodes()[0]
         #self.log(my_node)   
@@ -140,22 +140,16 @@ class Epivigi(Experiment):
             my_node.bonus = my_bonus
             their_node.bonus = their_bonus
 
-            # bonus to me
-            self.log("Bonus = {}: paying bonus".format(my_bonus))
-            participant.recruiter.reward_bonus(
-                participant,
-                my_bonus,
-                self.bonus_reason(),
-                )
-
             # bonus to them
             self.log("Bonus = {}: paying bonus".format(their_bonus))
             their_participant.recruiter.reward_bonus(
                 their_participant,
                 their_bonus,
                 self.bonus_reason(),
-                )            
-        return True # Note, the function must return TRUE. Otherwise the participant's data will get rejected.
+                )
+            return my_bonus # Note, the function must return TRUE. Otherwise the participant's data will get rejected.
+        else:
+            return 0
 
     def recruit(self):
         """Recruit runs automatically when a participant finishes and will ask it to run when a participant fails too.
