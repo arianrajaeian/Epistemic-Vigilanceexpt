@@ -4,7 +4,7 @@ auto_recruit = true
 webdriver_type = chrome_headless
 
 [MTurk]
-title = Psychology study
+title = Circle estimation game
 description = Estimate differences in the number of circles while learning from others
 keywords = Psychology, numerosity, copying, social learning
 base_payment = 1.50
@@ -14,15 +14,15 @@ us_only = true
 approve_requirement = 95
 contact_email_on_error = robin.o.watson@outlook.com
 ad_group = EpistemicVigilance
-organization_name = Echolab@ASU
+organization_name = Eccolab@ASU
 browser_exclude_rule = MSIE, mobile, tablet
 
 [Database]
 database_url = postgresql://postgres@localhost/dallinger # I'm not sure about this line, look at the docs
-database_size = standard-0
+database_size = standard-2
 
-[Server] # this will need configuring later
-dyno_type = hobby
+[Server] 
+dyno_type = standard-2x
 num_dynos_web = 1
 num_dynos_worker = 1
 redis_size = premium-0
@@ -31,4 +31,4 @@ clock_on = false
 logfile = -
 
 [Docker]
-docker_image_base_name = ghcr.io/dallinger/dallinger/bartlett1932 # again look at the docs.
+docker_image_base_name = ghcr.io/dallinger/dallinger/epistemic_vigilance # again look at the docs.
