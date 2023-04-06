@@ -1,4 +1,4 @@
-"""An experiment testing epistemic vigilance has a hypothesis to explain egocentric discounting"""
+"""An experiment testing epistemic vigilance as a hypothesis to explain egocentric discounting"""
 
 import logging
 from dallinger.config import get_config
@@ -100,7 +100,8 @@ class Epivigi(Experiment):
             node.receive()
 
     def bonus(self, participant):
-        """This function runs when a participant completes the experiment. Here, we manually award the bonuses to player A and B, if the player is B"""
+        """This function runs when a participant completes the experiment. Here, we manually award the bonuses to player A if the player is B and let the function resolve
+        as normal for player B."""
         my_node = participant.nodes()[0]
         #self.log(my_node)   
         if my_node.type == "Probe_node":
@@ -147,12 +148,12 @@ class Epivigi(Experiment):
                 their_bonus,
                 self.bonus_reason(),
                 )
-            return my_bonus # Note, the function must return TRUE. Otherwise the participant's data will get rejected.
+            return my_bonus
         else:
             return 0
 
     def recruit(self):
-        """Recruit runs automatically when a participant finishes and will ask it to run when a participant fails too.
+        """Recruit runs automatically when a participant finishes and will run when a participant fails too.
         If there are still unfilled networks, we recruit another participant"""
         if self.networks(full=False):
             self.recruiter.recruit(n=1)
