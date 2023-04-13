@@ -1,0 +1,19 @@
+{
+    "device_compatibility" : [
+        "desktop"
+    ],
+    "eligibility_requirements": [
+        {
+            "attributes": [
+                {
+                    "name": "black_list",
+                    "value": [
+                        "6110e6b44add6c570d8c6fe0",
+                        "5c98b190f74b3500012c181c"
+                    ]
+                }
+            ],
+            "_cls": "web.eligibility.models.CustomBlacklistEligibilityRequirement"
+        }
+    ]
+}
