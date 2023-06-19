@@ -2,7 +2,6 @@
 mode = sandbox
 auto_recruit = true
 webdriver_type = chrome_headless
-recruiter = mturk
 
 [MTurk]
 title = Circle estimation game
