@@ -1,5 +1,5 @@
 [Experiment]
-auto_recruit = false
+auto_recruit = true
 webdriver_type = chrome_headless
 recruiter = prolific
 
