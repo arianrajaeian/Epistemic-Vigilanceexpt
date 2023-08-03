@@ -174,19 +174,35 @@ function submitAnswer(answer){
 
 
 //// Instructions 2 ////
+function startPage(){
+    Status = dallinger.storage.get("been_to_comp");
+    if(Status == "Tried comprehension check"){
+        retrieveAgent();
+    } else {
+        createAgent(); 
+    }
+}
+
 function createAgent() {
-  dallinger.createAgent()
+    dallinger.createAgent()
     .done(function (resp) {
         my_node = resp.node;
         my_node_id = resp.node.id;
         dallinger.storage.set("my_node_id", my_node_id);
-        node_type = my_node.type
+        node_type = my_node.type;
         dallinger.storage.set("node_type", node_type);
-        condition = my_node.property2
+        condition = my_node.property2;
         dallinger.storage.set("condition", condition);
         displayPage(); 
     })
     .fail(function (rejection) { go_to_questionnaire(); });
+}
+
+function retrieveAgent(){
+    my_node_id = dallinger.storage.get("my_node_id");
+    node_type = dallinger.storage.get("node_type");
+    condition = dallinger.storage.get("condition");
+    displayPage();
 }
 
 function displayPage(){
@@ -197,11 +213,11 @@ function displayPage(){
     }
 
     if(condition == "Cooperative"){
-        $("#Bonus").html("The bonus fund will be split evenly between both players.")
+        $("#Bonus").html("The bonus fund will be split evenly between both players.");
     } else if (condition == "Fully_comp"){
-        $("#Bonus").html("The player who got the most questions right will receive the bonus fund.")
+        $("#Bonus").html("The player who got the most questions right will receive the bonus fund.");
     } else {
-        $("#Bonus").html("The player who got the most questions right will receive 50% of the bonus fund. In addition, the remainder of the bonus fund will be split evenly between both players.")
+        $("#Bonus").html("The player who got the most questions right will receive 75% of the bonus fund. The other player will receive 25%.");
     }
 }
 
@@ -226,11 +242,11 @@ function nextButton2(){
 function determineCondition(){
     Condition = dallinger.storage.get("condition");
     if(Condition == "Cooperative"){
-        correctCondition = "It is split evenly between both players."
+        correctCondition = "The bonus fund will be split evenly between both players."
     } else if(Condition == "Fully_comp"){
-        correctCondition = "The most successful player gets all of the bonus."
+        correctCondition = "The player who got the most questions right will receive the bonus fund."
     } else {
-       correctCondition = "The most successful player gets most of it, but the other player still gets some." 
+       correctCondition = "The player who got the most questions right will receive 75% of the bonus fund. The other player will receive 25%." 
     }
     my_node_id = dallinger.storage.get("my_node_id");
 }
@@ -247,31 +263,29 @@ function pingButton(type, response){
     }
 }
 
+var questionAttempts = 0;
+
 function attemptAdvance(){
+    questionAttempts = questionAttempts + 1
     if($("#Task").text() == "True" && $("#Answer").text() == "True" && $("#Advice").text() == "True" && $("#Bonus").text() == correctCondition){
-        if(questionAttempts == 0){
         dallinger.createInfo(my_node_id ,{
-            contents: "First try",
+            contents: questionAttempts,
             info_type: 'Comp_Info'
         }).done(function(resp){
-            dallinger.goToPage("experiment");
-        })          
-        }
-        if(questionAttempts == 1){
-        dallinger.createInfo(my_node_id ,{
-            contents: "Second try",
-            info_type: 'Comp_Info'
-        }).done(function(resp){
-            dallinger.goToPage("experiment");
-        })          
-        }                    
+            dallinger.goToPage('experiment');
+        })  
     } else {
-        if(questionAttempts == 0){
-            questionAttempts = 1;
-            $("#warning").show();
-        } else {
-            dallinger.goToPage("removed")
+        $("#warning").show();
+        if(questionAttempts == 2){
+            $("#warning").html("You seem to be having some trouble with the comprehension questions. If you answer incorrectly again, we will send you back to the instructions page. Or, you can return the submission if you wish by closing the window and clicking 'return'.")
         }
-        
+        if(questionAttempts == 3){
+            dallinger.createInfo(my_node_id ,{
+                contents: "Sent back to instructions",
+                info_type: 'Comp_Info'
+            }).done(function(resp){
+                dallinger.goToPage('instructions/Instructions_2');
+            })    
+        }
     }
 }

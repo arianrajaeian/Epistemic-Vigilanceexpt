@@ -8,11 +8,11 @@
 
         <div id = "First_instructions">
 
-            <p>Player A will answer each question once. After entering their answer, player A will leave advice for player B about what they should answer. Note, player A does not have to be honest about their real answer. 
-            </p> 
+            <p>Player A will answer each question once. After entering their answer, player A will leave advice for player B about what they should answer.</p>
 
-            <p>Player B will answer each question twice. First, before receiving any information from player A, and then again after receiving information from player A. Sometimes this information will be the advice left by player A (advice), other times it will be accurate information showing player A’s actual answer (spied information). On some questions player B can choose whether to receive advice or spied information.
-            </p>
+            <p style="font-weight: bold;">Player A does not have to be honest about their real answer.</p> 
+
+            <p>Player B will answer each question twice. First, before receiving any information from player A, and then again after receiving information from player A. Sometimes this information will be the advice left by player A (advice), other times it will be accurate information showing player A’s actual answer (spied information). On some questions player B can choose whether to receive advice or spied information.</p>
 
             <p>After providing your answer(s), you will not be told whether your answer was correct or not.</p>
 
@@ -22,7 +22,7 @@
 
             <p id = "My_role" style="font-weight: bold;"></p>
 
-            <p>At the end of the study, players will earn a bonus. Each time either player answers a question correctly, $0.10 will be added to the bonus fund (totalling $3 if all answers are correct).</p>
+            <p>During the study, a bonus fund will be accumulated. Each time either player answers a question correctly, $0.10 will be added to the bonus fund (totalling $3 if all answers are correct). The below information explains how this bonus fund will be distributed between each player (you will be asked to recall this information on the following page):</p>
 
             <p id = "Bonus" style="font-weight: bold;"></p> 
 
@@ -49,7 +49,7 @@
 
 {% block scripts %}
     <script>
-        createAgent();
+        startPage();
     </script>
 {% endblock %}
 

@@ -6,19 +6,16 @@
 
         <hr>
 
-        <p>To check your understanding of the study, please answer the following questions. Make sure to check your answers carefully before clicking "continue". If you are incorrect on your first attempt, you will only get one chance to 
-        check your answers before you are removed from the study.</p> 
+        <p>To check your understanding of the study, please answer the following questions. Make sure to check your answers carefully before clicking "continue".</p> 
 
-        <p>We will be unable to pay you if you do not pass the comprehension check.</p>
-
-        <div class = "row">
+        <div class = "row" style = "display:none">
                 <div class = "col-md-12 text-center">
                     <h4>Player A's task is easier than player B's task?</h4>
-                    <h5 id = "Task"><b>...</b></h5>
+                    <h5 id = "Task"><b>True</b></h5>
                 </div>
         </div>
 
-        <div class = "row">
+        <div class = "row" style = "display:none">
                 <div class = "col-md-3 text-center"></div>
                 <div class = "col-md-3 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Task', 'True')">TRUE</button>
@@ -33,7 +30,7 @@
 
         <div class = "row">
                 <div class = "col-md-12 text-center">
-                    <h4>The answer for player A is the same as the answer for player B for each question?</h4>
+                    <h4>Question 1) The correct answer for player A is the same as the correct answer for player B for each question?</h4>
                     <h5 id = "Answer"><b>...</b></h5>
                 </div>
         </div>
@@ -51,14 +48,14 @@
 
         <br>
 
-        <div class = "row">
+        <div class = "row" style = "display:none">
                 <div class = "col-md-12 text-center">
                     <h4>The advice left by player A may not be what they actually answered?</h4>
-                    <h5 id = "Advice"><b>...</b></h4>
+                    <h5 id = "Advice"><b>True</b></h4>
                 </div>
         </div>
 
-        <div class = "row">
+        <div class = "row" style = "display:none">
                 <div class = "col-md-3 text-center"></div>
                 <div class = "col-md-3 text-center">
                     <button type = "button" class = "btn btn-success" onClick="pingButton('Advice', 'True')">TRUE</button>
@@ -73,20 +70,20 @@
 
         <div class = "row">
                 <div class = "col-md-12 text-center">
-                    <h4>How is the bonus payment split at the end of the game?</h4>
+                    <h4>Question 2) How is the bonus payment distributed at the end of the game?</h4>
                     <h5 id = "Bonus"><b>...</b></h5>
                 </div>
         </div>
 
         <div class = "row">
                 <div class = "col-md-4 text-center">
-                    <button type = "button" class = "btn btn-success" onClick="pingButton('Bonus', 'It is split evenly between both players.')">Evenly</button>
+                    <button type = "button" class = "btn btn-success" onClick="pingButton('Bonus', 'The bonus fund will be split evenly between both players.')">The bonus fund will be split evenly between both players.</button>
                 </div>
                 <div class = "col-md-4 text-center">
-                    <button type = "button" class = "btn btn-success" onClick="pingButton('Bonus', 'The most successful player gets most of it, but the other player still gets some.')">More to the most successful player</button>
+                    <button type = "button" class = "btn btn-success" onClick="pingButton('Bonus', 'The player who got the most questions right will receive 75% of the bonus fund. The other player will receive 25%.')">The player who got the most questions right will receive 75% of the bonus fund. The other player will receive 25%.</button>
                 </div>
                 <div class = "col-md-4 text-center">
-                    <button type = "button" class = "btn btn-success" onClick="pingButton('Bonus', 'The most successful player gets all of the bonus.')">All to the most successful player</button>
+                    <button type = "button" class = "btn btn-success" onClick="pingButton('Bonus', 'The player who got the most questions right will receive the bonus fund.')">The player who got the most questions right will receive the bonus fund.</button>
                 </div>
         </div>
 
@@ -114,8 +111,8 @@
    // }, 250);
 //})
 determineCondition();
-questionAttempts = 0;
-    </script>
+dallinger.storage.set("been_to_comp", "Tried comprehension check");
+</script>
 {% endblock %}
 
 {% block libs %}
