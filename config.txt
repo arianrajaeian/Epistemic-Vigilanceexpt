@@ -1,7 +1,7 @@
 [Experiment]
-mode = sandbox
-auto_recruit = true
+auto_recruit = false
 webdriver_type = chrome_headless
+recruiter = prolific
 
 [MTurk]
 title = Circle estimation game
@@ -21,10 +21,10 @@ assign_qualifications = true
 
 [Prolific]
 title = Circle estimation game
-description = Estimate differences in the number of circles while learning from others
+description = Estimate differences in the number of circles while learning from others. Note - we strongly advise completing the experiment in FULLSCREEN and in incognito mode to avoid any browser or display issues. 
 prolific_estimated_completion_minutes = 15
 prolific_maximum_allowed_minutes = 45
-prolific_reward_cents = 150
+prolific_reward_cents = 200
 prolific_recruitment_config = file:prolific_config.json
 
 [Database]
