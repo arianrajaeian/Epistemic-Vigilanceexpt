@@ -10,8 +10,6 @@
 
         <div id = "feedback_div" style = "display:none">
 
-        <hr>
-
         <h4 id = "Answer"> </h4>
         <h4 id = "Advice">The advice that player B will see for this question is: 0</h4>
 
@@ -19,15 +17,11 @@
 
         <div id = "Info_div" style = "display:none">
 
-        <hr>
-
         <h4 id = "first_guess"> </h4>
         <h4 id = "Social_info"> </h4>
         <h4 id = "extra_info" style = "display:none">Before doing so, you may choose to view information from player A. You may view their advice or spy on them.</h4>
 
         </div>
-
-        <br>
 
         <div id = "stimulus_div" style = "display:none;">
            <div class="trial_text" id="stimulus_div" style="height: 430px;">
@@ -43,8 +37,9 @@
                 data-from="0">
             </div>
         </div>
-    </div>  
-    </div>
+    </div> 
+
+    <hr> 
 
     <div id = "button_div" style = "display:none">
         <div class = "row">
@@ -56,7 +51,6 @@
                 <button type="button" class="btn btn-info btn-lg" onClick="displaySpy();">Spy</button>                 
             </div>            
         </div> 
-        <br>
     </div>        
 
     <div class = "row">
@@ -71,7 +65,9 @@
             <button id = "Submit_revision" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitRevision(guessSlider.prop('value'));">
             Submit answer</button>                                                                                                                        
         </div>
-    </div>         
+    </div> 
+
+</div>       
 {% endblock %}
 
 {% block scripts %}
