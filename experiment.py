@@ -28,8 +28,8 @@ class Epivigi(Experiment):
         from . import models  # Import at runtime to avoid SQLAlchemy warnings
 
         self.models = models
-        self.experiment_repeats = 1 # How many networks?
-        self.initial_recruitment_size = 1
+        self.experiment_repeats = 5 # How many networks?
+        self.initial_recruitment_size = 5
         self.inactivity_time_limit = 360 # How long before a node is failed and the participant replaced
         self.known_classes = {
             "Drone" : models.Drone,
