@@ -1,5 +1,26 @@
 ///// Instructions 1 /////
 
+function beginInstructions(){
+    dallinger.createParticipant()
+    .done(function(resp){
+        createAgent();
+    })
+}
+
+function createAgent() {
+    dallinger.createAgent()
+    .done(function (resp) {
+        my_node = resp.node;
+        my_node_id = resp.node.id;
+        dallinger.storage.set("my_node_id", my_node_id);
+        node_type = my_node.type;
+        dallinger.storage.set("node_type", node_type);
+        condition = my_node.property2;
+        dallinger.storage.set("condition", condition);
+    })
+    .fail(function (rejection) { go_to_questionnaire(); });
+}
+
 function backButton(){
     const button = document.getElementById('Next');
     if ($('#Two').is(':visible')) {
@@ -175,27 +196,7 @@ function submitAnswer(answer){
 
 //// Instructions 2 ////
 function startPage(){
-    Status = dallinger.storage.get("been_to_comp");
-    if(Status == "Tried comprehension check"){
-        retrieveAgent();
-    } else {
-        createAgent(); 
-    }
-}
-
-function createAgent() {
-    dallinger.createAgent()
-    .done(function (resp) {
-        my_node = resp.node;
-        my_node_id = resp.node.id;
-        dallinger.storage.set("my_node_id", my_node_id);
-        node_type = my_node.type;
-        dallinger.storage.set("node_type", node_type);
-        condition = my_node.property2;
-        dallinger.storage.set("condition", condition);
-        displayPage(); 
-    })
-    .fail(function (rejection) { go_to_questionnaire(); });
+    retrieveAgent();
 }
 
 function retrieveAgent(){
