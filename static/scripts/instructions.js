@@ -17,6 +17,7 @@ function createAgent() {
         dallinger.storage.set("node_type", node_type);
         condition = my_node.property2;
         dallinger.storage.set("condition", condition);
+        dallinger.storage.set("attempts", 0); // This cookie records how many tries they take to pass the comprehension check. Necessary if they get sent back to the instruction page. 
     })
     .fail(function (rejection) { go_to_questionnaire(); });
 }
@@ -264,10 +265,9 @@ function pingButton(type, response){
     }
 }
 
-var questionAttempts = 0;
-
 function attemptAdvance(){
     questionAttempts = questionAttempts + 1
+    pageAttempts = pageAttempts + 1
     if($("#Task").text() == "True" && $("#Answer").text() == "True" && $("#Advice").text() == "True" && $("#Bonus").text() == correctCondition){
         dallinger.createInfo(my_node_id ,{
             contents: questionAttempts,
@@ -277,16 +277,12 @@ function attemptAdvance(){
         })  
     } else {
         $("#warning").show();
-        if(questionAttempts == 2){
+        if(pageAttempts == 2){
             $("#warning").html("You seem to be having some trouble with the comprehension questions. If you answer incorrectly again, we will send you back to the instructions page. Or, you can return the submission if you wish by closing the window and clicking 'return'.")
         }
-        if(questionAttempts == 3){
-            dallinger.createInfo(my_node_id ,{
-                contents: "Sent back to instructions",
-                info_type: 'Comp_Info'
-            }).done(function(resp){
-                dallinger.goToPage('instructions/Instructions_2');
-            })    
+        if(pageAttempts == 3){
+            dallinger.storage.set("attempts", 3)
+            dallinger.goToPage('instructions/Instructions_2');  
         }
     }
 }

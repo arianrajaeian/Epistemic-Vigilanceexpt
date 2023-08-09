@@ -4,16 +4,17 @@
     ],
     "eligibility_requirements": [
         {
+            "_cls": "web.eligibility.models.PreviousStudiesEligibilityRequirement",
             "attributes": [
                 {
-                    "name": "black_list",
-                    "value": [
-                        "6110e6b44add6c570d8c6fe0",
-                        "5c98b190f74b3500012c181c"
-                    ]
+                    "id": "64c8c28f9d857d49c43ca052",
+                    "value": true
+                },
+                {
+                    "id": "64cb9a6f831e75eec21b93ad",
+                    "value": true
                 }
-            ],
-            "_cls": "web.eligibility.models.CustomBlacklistEligibilityRequirement"
+            ]
         }
     ]
 }
