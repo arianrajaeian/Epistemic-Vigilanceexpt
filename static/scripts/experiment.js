@@ -1,6 +1,6 @@
 var Player
 var Questions = 1
-var numQuestions = 15
+var numQuestions = 20
 var transmitted_blueDots = 0
 var transmitted_yellowDots = 0
 var socialInfoTypes = [1,1,1,1,1,0,0,0,0,0] // There needs to be 5 1s and 5 0s in this array. If the array is empty, it lets participants choose 
@@ -225,7 +225,7 @@ function socialDiv(answer){
     $("#Submit_revision").show();      
     $("#Small_header").html("You may now amend your guess if you wish.");
     $("#first_guess").html("Your first answer was: " + answer);  
-    SocialInfo = socialInfoTypes.splice(Math.floor(Math.random() * socialInfoTypes.length), 1)[0];
+    SocialInfo = socialInfoTypes.splice(Math.floor(Math.random() * socialInfoTypes.length), 1)[0]; // Randomly sample a number from the array to determine kind of social information shown.
     if(SocialInfo == 0){
         displayAdvice();
     } else if (SocialInfo == 1) {
