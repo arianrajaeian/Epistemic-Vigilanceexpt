@@ -96,22 +96,26 @@
         <div class = "row">
             <div class="col-md-10"></div>
             <div class="col-md-2"> 
-             <button type="button" class="btn btn-success btn-lg" onClick="attemptAdvance();">Continue</button>
+             <button id = "continue-button" type="button" class="btn btn-success btn-lg" onClick="attemptAdvance();">Continue</button>
              </div>
         </div>        
     </div>
 {% endblock %}
 
 {% block scripts %}
-    <script>
-//$('.btn').click(function() {
-   // $(this).removeClass('btn-success').addClass('btn-light ');
-   // setTimeout(function(){
-    //    $('.btn').addClass('btn-success').removeClass('btn-light ');
-   // }, 250);
-//})
-determineCondition();
-dallinger.storage.set("been_to_comp", "Tried comprehension check");
+<script>
+    determineCondition();
+    questionAttempts = dallinger.storage.get("attempts");
+    pageAttempts = 0;
+
+    var button = document.getElementById("continue-button");
+    function disableButtonBriefly() {
+      button.disabled = true; // Disable the button
+      setTimeout(function() {
+        button.disabled = false; // Re-enable the button after a delay
+      }, 1500);
+    }
+    button.addEventListener("click", disableButtonBriefly);
 </script>
 {% endblock %}
 
