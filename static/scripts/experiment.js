@@ -47,7 +47,7 @@ function extractInfo(){
     A_answer = Contents.Answer
     A_advice = Contents.Advice
     if(Contents.Question != Questions){
-        console.log("WRONG QUESTION ABORT ")
+        dallinger.goToPage('survey');
     }
     return Promise.resolve();
 }
@@ -64,7 +64,7 @@ async function continueTrial() {
         contents: "End",
         info_type: 'Finished'
       }).done(function(resp) {
-        dallinger.goToPage('survey')
+        dallinger.goToPage('survey');
       });                  
     } else { 
       if (Player == "B") {
