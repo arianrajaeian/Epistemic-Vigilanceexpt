@@ -16,10 +16,18 @@ function createAgent() {
         node_type = my_node.type;
         dallinger.storage.set("node_type", node_type);
         condition = my_node.property2;
+        metacognition = my_node.property4;
+        dallinger.storage.set("metacognition", metacognition);
         dallinger.storage.set("condition", condition);
         dallinger.storage.set("attempts", 0); // This cookie records how many tries they take to pass the comprehension check. Necessary if they get sent back to the instruction page. 
     })
-    .fail(function (rejection) { go_to_questionnaire(); });
+    .fail(function (rejection) {extraParticipant(); });
+}
+
+function extraParticipant(){
+    // If a participant returns the submission after starting and they already created a Node, then the Node creation step will fail. 
+    // To avoid continuously recruiting replacements, we need the participant to submit rather than return, so we send them to a page explaining this. 
+    dallinger.goToPage('instructions/woops');
 }
 
 function backButton(){
@@ -52,20 +60,20 @@ function nextButton(){
 }
 
 //// Mock trials ////
-
 function continueTrial(){
     if ($('#answer_div').is(':visible')){
-        $("#answer_div").hide();
-        $("#Small_header").show();
-        $("#Next").show();
-        if (Questions < 3){
-            $("#Small_header").html("You are about to see an example of a player A question. When you are ready, click the button below to reveal the image.");
-        } else if(Questions < 5){
-            $("#Small_header").html("You are about to see an example of a player B question. When you are ready, click the button below to reveal the image.");
-        } else {
-            dallinger.goToPage('instructions/Instructions_2')
+        if (Questions == 5){
+            dallinger.goToPage('instructions/Instructions_2');
         } 
-    } else {
+        else if(Questions < 3){
+            displayPageElements();
+            $("#Small_header").html("You are about to see an example of a player 1 question. When you are ready, click the button below to reveal the image.");
+        } 
+        else if(Questions < 5){
+            displayPageElements();
+            $("#Small_header").html("You are about to see an example of a player 2 question. When you are ready, click the button below to reveal the image.");
+        }
+    } else {       
         generateDots();
         presentDisplay();
         Questions = Questions + 1
@@ -73,6 +81,12 @@ function continueTrial(){
         $("#Next").hide();
     }        
 }
+
+function displayPageElements(){
+    $("#answer_div").hide(); 
+    $("#Small_header").show();
+    $("#Next").show();
+};
 
 function shuffle(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -91,14 +105,14 @@ function generateDots () {
         blueDots = Math.floor(Math.random() * 11); // Generate a random number of blue dots between 0 and 10.
         yellowDots = 10 - blueDots
         if(blueDots < 10){
-           blueDots = blueDots + Math.round(Math.random()) // To allow there to be odd differences. 
+           blueDots = blueDots + Math.round(Math.random()) // To allow there to be odd differences 
         }
         if(Questions < 3){
-            // Its a player A question.
+            // Its a player 1 question. There will be a maximum of 15 dots on screen
             yellowDots = yellowDots + 2 // Note, you must add at least 1. Otherwise, if there are 10 blue dots, there will be 0 yellow dots. 
             blueDots = blueDots + 2
         } else {
-            // Its a player B question, so make it a bit harder.
+            // Its a player 2 question, so make it a bit harder. There will be a maximum of 19 dots on screen
             yellowDots = yellowDots + 4
             blueDots = blueDots + 4
         }
@@ -204,22 +218,28 @@ function retrieveAgent(){
     my_node_id = dallinger.storage.get("my_node_id");
     node_type = dallinger.storage.get("node_type");
     condition = dallinger.storage.get("condition");
+    metacognition = dallinger.storage.get("metacognition");
     displayPage();
 }
 
 function displayPage(){
     if(node_type == "Drone_node"){
-        $("#My_role").html("You will be player A in this study. This means you will answer each question once. After answering each question, you will leave advice for player B about what they should answer.");
+        $("#My_role").html("You will be player 1 in this study. This means you will answer each question once. After answering each question, you will leave advice for player 2 about what they should answer.");
     } else {
-        $("#My_role").html("You will be player B in this study. This means you will answer each question twice. First without receiving any information from player A, and then again after receiving information from player A.");
+        $("#My_role").html("You will be player 2 in this study. This means you will answer each question twice. First without receiving any information from player 1, and then again after receiving information from player 1.");
     }
 
     if(condition == "Cooperative"){
-        $("#Bonus").html("The bonus fund will be split evenly between both players.");
-    } else if (condition == "Fully_comp"){
-        $("#Bonus").html("The player who got the most questions right will receive the bonus fund.");
+        $("#Bonus_Instruct").html("both players earn a $0.05 bonus. As such, both players benefit from each other's performance.");
+    } else if (condition == "Competitive"){
+        $("#Bonus_Instruct").html("$0.10 is added to their bonus fund. However, only the player who got the most questions right will actually receive their bonus fund: The other player will receive no bonus. As such, players benefit from outperforming their partner.");
+    } else if (condition == "Neutral"){
+        $("#Bonus_Instruct").html("they earn a $0.10 bonus. As such, each player benefits from their own performance, regardless of their partner's performance.");
+    }
+    if (metacognition == "Yes") {
+        $("#meta_instruct").html("Player 1 will give advice on what they think the answer is, as well as how confident they are on their answer.");
     } else {
-        $("#Bonus").html("The player who got the most questions right will receive 75% of the bonus fund. The other player will receive 25%.");
+        $("#meta_instruct").html("Player 1 will give advice on what they think the answer is.");
     }
 }
 
@@ -240,15 +260,14 @@ function nextButton2(){
 }
 
 //// Comprehension ////
-
 function determineCondition(){
     Condition = dallinger.storage.get("condition");
     if(Condition == "Cooperative"){
-        correctCondition = "The bonus fund will be split evenly between both players."
-    } else if(Condition == "Fully_comp"){
-        correctCondition = "The player who got the most questions right will receive the bonus fund."
-    } else {
-       correctCondition = "The player who got the most questions right will receive 75% of the bonus fund. The other player will receive 25%." 
+        correctCondition = "Both players earn a $0.05 bonus"
+    } else if(Condition == "Competitive"){
+        correctCondition = "$0.10 is added to their bonus fund. The player that gets the most questions right will receive their bonus fund. The other player will receive no bonus"
+    } else if(Condition == "Neutral"){
+       correctCondition = "They earn a $0.10 bonus" 
     }
     my_node_id = dallinger.storage.get("my_node_id");
 }
@@ -278,7 +297,7 @@ function attemptAdvance(){
     } else {
         $("#warning").show();
         if(pageAttempts == 2){
-            $("#warning").html("You seem to be having some trouble with the comprehension questions. If you answer incorrectly again, we will send you back to the instructions page. Or, you can return the submission if you wish by closing the window and clicking 'return'.")
+            $("#warning").html("You seem to be having some trouble with these questions. Have one more try, but if you don't get them right this time, we will send you back to re-read the instructions. If you'd rather just return the experiment, you can do so by closing the window and clicking ‘return’.")
         }
         if(pageAttempts == 3){
             dallinger.storage.set("attempts", 3)

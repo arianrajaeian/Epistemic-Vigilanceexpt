@@ -1,37 +1,37 @@
 var Player
-var Questions = 1
-var numQuestions = 20
+var Questions = 0 // Leave this as 0, this is a counter for the number of questions the participant has done. 
+var numQuestions = 4 // How many questions in total? changed it from 20 to 5
 var transmitted_blueDots = 0
 var transmitted_yellowDots = 0
-var socialInfoTypes = [1,1,1,1,1,0,0,0,0,0] // There needs to be 5 1s and 5 0s in this array. If the array is empty, it lets participants choose 
 var time = 0 // How long have participants spent
 
 function tickClock(){
-  time = time + 1;
+  time = time + 1; // update the value of "time" to increase by 1.
   setTimeout(function(){
     tickClock();
-  }, 1000)
-}
+  }, 1000) // function runs every second
+} // basically this function increases the value of the variable "time" by 1 every second.
 
-function resetTimer() {
+function resetTimer() { 
   time = 0
-}
+} // resets time to 0.
 
 function determinePlayer(){
     node_id = dallinger.storage.get("my_node_id");
     node_type = dallinger.storage.get("node_type");
+    metacognition = dallinger.storage.get("metacognition"); // retrieve info about if there is metacognition.
     if(node_type == "Drone_node"){
-        Player = "A"
+        Player = "A" // if the node is a drone, it's player A.
     } else {
-        Player = "B"
+        Player = "B" // if it is a probe, it's player B
     }    
-}
+} // this function doesn't call other functions.
 
 function getInfo() {
   // Get info for node
-  dallinger.getReceivedInfos(node_id)
+  dallinger.getReceivedInfos(node_id) // calls this function in dallinger
     .done(function (resp) {
-        Infos = resp.infos
+        Infos = resp.infos // defines variable "Infos" as the infos in what function gives you back.
     })
     .fail(function (rejection) {
       console.log(rejection);
@@ -41,42 +41,46 @@ function getInfo() {
 
 function extractInfo(){
     // Pull out the needed information for player B
-    Contents = JSON.parse(Infos[Questions - 1].contents)
-    transmitted_blueDots = Contents.Blue
-    transmitted_yellowDots = Contents.Yellow
-    A_answer = Contents.Answer
-    A_advice = Contents.Advice
-    if(Contents.Question != Questions){
-        dallinger.goToPage('survey');
+    Contents = JSON.parse(Infos[Questions - 1].contents);
+    transmitted_blueDots = Contents.Blue; // Transmit the blue dots
+    transmitted_yellowDots = Contents.Yellow; //Transmit yellow dots 
+    A_advice = Contents.Advice; // Player A's advice 
+    if (metacognition == "Yes"){
+        A_confidence = Contents.Confidence; // Player A's confidence
     }
-    return Promise.resolve();
+    //if(Contents.Question != Questions){
+       // dallinger.goToPage('survey');
+    //};
+    return Promise.resolve(); // huh
 }
 
-async function continueTrial() {
+async function continueTrial() { // this function moves them along from question to question.
+    console.log("Called continue trial");
   if ($('#feedback_div').is(':visible') || $('#Info_div').is(':visible')) {
     $("#feedback_div").hide();
     $("#Info_div").hide();
     $("#Next").show(); 
     $("#Small_header").html("When you are ready to continue, click the button below.");
   } else {
+    Questions = Questions + 1;
     if (Questions > numQuestions) {
       dallinger.createInfo(node_id, {
         contents: "End",
         info_type: 'Finished'
       }).done(function(resp) {
-        dallinger.goToPage('survey');
+        dallinger.goToPage('survey'); // if participant has answered all 20 questions, finish and go to survey.
       });                  
     } else { 
-      if (Player == "B") {
+      if (Player == "B") { // player 2 has to wait for dallinger to transmit player A's data for that question first.
         await extractInfo();
       }
       resetTimer();
       $("#Main_header").html("Question " + Questions + " / " + numQuestions);          
       $("#Small_header").hide();
       $("#Next").hide();        
-      generateDots(transmitted_blueDots, transmitted_yellowDots);
-      presentDisplay();
-    }         
+      generateDots(transmitted_blueDots, transmitted_yellowDots); //present new set if blue/yellow dots
+      presentDisplay(); // calls this function
+    }         // basically moves participant onto next question if they haven't finished yet.
   }   
 }
 
@@ -94,23 +98,23 @@ function generateDots(transmitted_blueDots, transmitted_yellowDots) {
         width = 600;
         height = 400;
         if(Player == "A"){
-            // generate the array for player A
-            blueDots = Math.floor(Math.random() * 11); // Generate a random number of blue dots between 0 and 10.
-            yellowDots = 10 - blueDots
-            if(blueDots < 10){
+            // generate the array for player 1
+            blueDots = Math.floor(Math.random() * 21); // Generate a random number of blue dots between 0 and 10.
+            yellowDots = 20 - blueDots // yellow and blue dots always add up to 10.
+            if(blueDots < 20){
                 blueDots = blueDots + Math.round(Math.random()) // To allow there to be odd differences. 
             }
             yellowDots = yellowDots + 2 // Note, you must add at least 1. Otherwise, if there are 10 blue dots, there will be 0 yellow dots. 
             blueDots = blueDots + 2            
         } else {
-            // Its a player B question, so it must be the same but more difficult
+            // Its a player 2 question, so it must be the same but more difficult
             blueDots = transmitted_blueDots
             yellowDots = transmitted_yellowDots
-            yellowDots = yellowDots + 2
-            blueDots = blueDots + 2
+            yellowDots = yellowDots + 4
+            blueDots = blueDots + 4
         }
 
-        excess = blueDots - yellowDots
+        excess = blueDots - yellowDots // excess is how many more blue than yellow dots
         numDots = blueDots + yellowDots
         dots = [];
         sizes = [];
@@ -173,47 +177,52 @@ function presentDisplay (argument) {
 
         lock = false;
         paper.clear();
-        allowGuess();
-    }, 2000);
+        allowGuess(); // calls allowGuess function
+    }, 2000); // I think this is the function that displays the dots for 2 seconds.
 }
 
-function allowGuess(){
+function allowGuess(){ // prompts participant to guess number of dots
     $("#stimulus_div").hide();
     $("#Small_header").show();
     $("#Small_header").html("How many more blue circles were there than yellow circles? When you are happy with your answer, click the button below.");
-    $("#Slider").show();
-    $("#Submit_answer").show();
+    $("#Slider").show(); //shows slider
+    $("#secondSlider").hide(); // hide the confidence slider.
+    $("#Submit_answer").show(); // allows you to submit answer. it calls the submitAnswer() function on click.
 }
 
 function submitAnswer(answer){
-    $('#Guessslider').data('ionRangeSlider').reset();
-    disableButtons();
+    $('#Guessslider').data('ionRangeSlider').reset(); //resets slider
+    disableButtons(); //calls disable buttons function
     $("#Submit_answer").hide();
     if(Player == "A"){
-        adviceDiv(answer);
+        adviceDiv(answer); // if it's player A, call advice div with the parameter value as "answer", which will be their answer.
     } else {
-        socialDiv(answer); 
+        socialDiv(answer); // if it's player B, call socialDiv function
     }
 }
 
 function adviceDiv(answer){
-    // Show the information for player A
-    $("#Advice").html("The advice that player B will see for this question is: 0");
-    $("#Submit_advice").show();
-    $("#feedback_div").show(); 
-    $("#Small_header").html("What advice would you like to leave for player B?");
+    // Show the information for player 1
+    $("#Advice").html("The advice that player 2 will see for this question is: 0");
+    $("#Submit_advice").show(); // button that allows you to submit
+    $("#feedback_div").show(); // overall div
+    $("#Small_header").html("What advice would you like to leave for player 2?");
     $("#Answer").html("You answered: " + answer);
-    createOutcomeInfo(answer);
-    Answer = answer;
+    if (metacognition == "Yes"){
+        $("#Confidence").html("The confidence score that player 2 will see for this question is: 5 out of 10");
+        $("#secondSlider").show(); // show the confidence slider
+    }
+    createOutcomeInfo(answer); // calls this function
+    Answer = answer; //not sure why, but it saves what you answered for your answer as "Answer"
 }
  
 function socialDiv(answer){
-    // Show the information for player B
+    // Show the information for player 2
     resps = {
         "Question" : Questions,
         "Answer" : answer
     }
-    dallinger.createInfo(node_id,{
+    dallinger.createInfo(node_id,{ // creates info of player A's guess
         contents: JSON.stringify(resps),
         info_type: 'First_guess',
         property1: JSON.stringify({
@@ -225,25 +234,23 @@ function socialDiv(answer){
     $("#Submit_revision").show();      
     $("#Small_header").html("You may now amend your guess if you wish.");
     $("#first_guess").html("Your first answer was: " + answer);  
-    SocialInfo = socialInfoTypes.splice(Math.floor(Math.random() * socialInfoTypes.length), 1)[0]; // Randomly sample a number from the array to determine kind of social information shown.
-    if(SocialInfo == 0){
-        displayAdvice();
-    } else if (SocialInfo == 1) {
-        displaySpy();
-    } else {
-        // The array is empty, so the participant can choose
-        displayChoice(); 
-    }
+    displayAdvice();
 } 
 
 function displayAdvice(){
     $("#button_div").hide();    
     $("#extra_info").hide();
-    $("#Social_info").html("<strong>The advice</strong> player A left for this question was: " + A_advice);
-    resps = {
+    $("#Social_info").html("<strong>The advice</strong> player 1 left for this question was: " + A_advice); //also state their confidence.
+    if (metacognition == "Yes"){
+        $("#conf_info").html("Player 1 rated their confidence in their answer as: " + A_confidence + " out of 10.")
+    }
+    resps = { // need to understand this better, but defines its content as player A's advice
         "Question" : Questions,
         "Type" : "Advice",
-        "Content" : A_advice
+        "Content" : A_advice,
+    }
+    if (metacognition == "Yes"){
+        resps["Confidence"] = A_confidence;
     }
     dallinger.createInfo(node_id,{
         contents: JSON.stringify(resps),
@@ -251,43 +258,28 @@ function displayAdvice(){
     })      
 }
 
-function displaySpy(){
-    $("#button_div").hide();
-    $("#extra_info").hide();
-    $("#Social_info").html("<strong>You spied</strong> on player A and the answer they selected for this question was: " + A_answer);
-    resps = {
-        "Question" : Questions,
-        "Type" : "Spied",
-        "Content" : A_answer
-    }
-    dallinger.createInfo(node_id,{
-        contents: JSON.stringify(resps),
-        info_type: 'Social_info'
-    })    
-}
 
-function displayChoice(){
-    $("#extra_info").show();
-    $("#button_div").show();
-}
-
-function submitAdvice(advice){
-    // Only runs for player A
-    $('#Guessslider').data('ionRangeSlider').reset();
-    Advice = advice
-    disableButtons();
-    createJSONInfo();
-    $("#Slider").hide();
+function submitAdvice(advice, confidence = null){ // confidence slider will be basically like this.
+    // Only runs for player 1
+    $('#Guessslider').data('ionRangeSlider').reset(); //resets slider
+    $('#ConfSlider').data('ionRangeSlider').reset();
+    Advice = advice; // html gives the parameter value for this argument, which this function saves as the variable (Advice)
+    if (metacognition == "Yes"){
+        Confidence = confidence;
+    }    
+    disableButtons(); // calls function
+    createJSONInfo(); // calls function
+    $("#Slider").hide(); //hides slider
     $("#Submit_advice").hide();
-    continueTrial(); 
-    Questions = Questions + 1
+    continueTrial(); // calls function
 }
+
 
 function submitRevision(revision){
     $('#Guessslider').data('ionRangeSlider').reset();
     $("#button_div").hide();
     disableButtons();
-    // Only runs for player B
+    // Only runs for player 2
     resps = {
         "Question" : Questions,
         "Answer" : revision
@@ -304,8 +296,7 @@ function submitRevision(revision){
         $("#Social_info ").html("");        
         $("#Slider").hide();
         $("#Submit_revision").hide();
-        continueTrial(); 
-        Questions = Questions + 1;    
+        continueTrial();  
     });     
 }
 
@@ -322,14 +313,16 @@ function createOutcomeInfo(finalAnswer){
 }
 
 function createJSONInfo(){
-    // Create the large JSON info for player B
+    // Create the large JSON info for player 2
     resps = {
         "Question" : Questions ,
         "Blue" : blueDots,
         "Yellow" : yellowDots,
-        "Answer" : Answer , 
-        "Advice" : Advice
+        "Advice" : Advice,
     };
+    if (metacognition == "Yes"){
+        resps["Confidence"] = Confidence;
+    }
   resps = JSON.stringify(resps);
   dallinger.createInfo(node_id, {
     contents: resps,
@@ -345,10 +338,16 @@ function createJSONInfo(){
 function updatePoints(value) {
   // Code for slider to update text displayed
   value = parseInt(value);
-  $("#Advice").html("The advice that player B will see for this question is: " + value);
-}
+  $("#Advice").html("The advice that player 2 will see for this question is: " + value);
+} // add one for the confidence player 2 will see is: + value. 
 
-function disableButtons(){
+function updateConfidence(conf_level) {
+    // Code for slider to update text displayed
+    conf_level = parseInt(conf_level); // turns the string into an integer.
+    $("#Confidence").html("The confidence score that player 2 will see for this question is: " + conf_level + " out of 10");
+  } 
+
+function disableButtons(){ // disables buttons
     $('#Submit_answer').prop('disabled', true); 
     $('#Submit_advice').prop('disabled', true); 
     $('#Submit_revision').prop('disabled', true); 

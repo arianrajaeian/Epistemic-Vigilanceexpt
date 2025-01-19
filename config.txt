@@ -1,7 +1,6 @@
 [Experiment]
-auto_recruit = true
+auto_recruit = false
 webdriver_type = chrome_headless
-recruiter = prolific
 
 [MTurk]
 title = Circle estimation game
@@ -19,26 +18,19 @@ browser_exclude_rule = MSIE, mobile, tablet
 group_name = Pilot1
 assign_qualifications = true
 
-[Prolific]
-title = Circle estimation game
-description = Estimate differences in the number of circles while learning from others. Note - we strongly advise completing the experiment in FULLSCREEN and in incognito mode to avoid any browser or display issues. 
-prolific_estimated_completion_minutes = 15
-prolific_maximum_allowed_minutes = 45
-prolific_reward_cents = 200
-prolific_recruitment_config = file:prolific_config.json
-
 [Database]
-database_url = postgresql://postgres@localhost/dallinger # I'm not sure about this line, look at the docs
+database_url = postgresql://postgres@localhost/dallinger
 database_size = standard-2
 
 [Server] 
 dyno_type = standard-2x
-num_dynos_web = 1
-num_dynos_worker = 1
+num_dynos_web = 5
+num_dynos_worker = 3
 redis_size = premium-0
 host = 0.0.0.0
 clock_on = false
 logfile = -
+heroku_python_version = 3.11.7
 
 [Docker]
-docker_image_base_name = ghcr.io/dallinger/dallinger/epistemic_vigilance # again look at the docs.
+docker_image_base_name = ghcr.io/dallinger/dallinger/epistemic_vigilance

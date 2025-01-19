@@ -11,7 +11,7 @@
         <div id = "feedback_div" style = "display:none">
 
         <h4 id = "Answer"> </h4>
-        <h4 id = "Advice">The advice that player B will see for this question is: 0</h4>
+        <h4 id = "Advice">The advice that player 2 will see for this question is: 0</h4>
 
         </div>
 
@@ -19,7 +19,8 @@
 
         <h4 id = "first_guess"> </h4>
         <h4 id = "Social_info"> </h4>
-        <h4 id = "extra_info" style = "display:none">Before doing so, you may choose to view information from player A. You may view their advice or spy on them.</h4>
+        <h4 id = "conf_info"> </h4>
+        <h4 id = "extra_info" style = "display:none">Before doing so, you may choose to view information from player 1. You may view their advice or spy on them.</h4>
 
         </div>
 
@@ -29,12 +30,25 @@
            </div>            
         </div>
     <div class = "row" id = "Slider" style = "display:none;">
-       <div class = "col-md-12 text-center">
+        <!---First slider for guessinng-->
+        <div class = "col-md-12 text-center">
             <div class = "slidecontainer">
                 <label>Indicate your answer using the slider.</label>
-                <input id="Guessslider" type="text" class="js-range-slider" name="my_range" value=""data-min="-10"
-                data-max="10"
+                <input id="Guessslider" type="text" class="js-range-slider" name="my_range" value=""data-min="-20"
+                data-max="20"
                 data-from="0">
+            </div>
+        </div>
+        <!---confidence slider-->
+        <div class="col-md-12 text-center" id="secondSlider" style="display:none; margin-top: 50px;">
+            <h4 style="text-align: left">How confident are you in your answer?</h4>
+            <h4 id="Confidence" style="text-align: left">The confidence score that player 2 will see for this question is: 5 out of 10</h4>
+            <div class="slidecontainer">
+                <label>Rate your confidence using the slider.</label>
+                <input id="ConfSlider" type="text" class="js-range-slider" name="second_range" value=""
+                data-min="0"
+                data-max="10"
+                data-from="5">
             </div>
         </div>
     </div> 
@@ -53,14 +67,14 @@
         </div> 
     </div>        
 
-    <div class = "row">
+    <div class = "row"> 
         <div class="col-md-9"></div>
         <div class="col-md-3"> 
             <button id = "Next" type="button" class="btn btn-success btn-lg" onClick="continueTrial();">
             Continue</button> 
             <button id = "Submit_answer" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitAnswer(guessSlider.prop('value'));">
             Submit answer</button>
-            <button id = "Submit_advice" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitAdvice(guessSlider.prop('value'));">
+            <button id = "Submit_advice" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitAdvice(guessSlider.prop('value'), confSlider.prop('value'));">
             Submit advice</button>
             <button id = "Submit_revision" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitRevision(guessSlider.prop('value'));">
             Submit answer</button>                                                                                                                        
@@ -76,15 +90,21 @@
         determinePlayer();
         getInfo();
         tickClock(); 
-      });
+      }); // I think these are the first functions that are called.
     var guessSlider = $('#Guessslider').ionRangeSlider({
         skin: "big",
         onFinish: function(data){
-            enableButtons();
+            enableButtons(); // allows you to click "next" butoon when you're done with slide
         },
         onChange: function(data){
           updatePoints(guessSlider.prop('value'));  
-        }
+        } // updates value displayed by the slider as you change it to that value.
+    }); 
+    var confSlider = $('#ConfSlider').ionRangeSlider({
+        skin: "big",
+        onChange: function(data){
+          updateConfidence(confSlider.prop('value'));  
+        }  
     });        
     </script>
 {% endblock %}

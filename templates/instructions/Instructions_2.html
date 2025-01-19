@@ -8,23 +8,17 @@
 
         <div id = "First_instructions">
 
-            <p>Player A will answer each question once. After entering their answer, player A will leave advice for player B about what they should answer.</p>
+            <p>On each question, player 1 answers first and also leaves advice for player 2. Player 2 answers twice; first on their own, then a second time after receiving information from player 1.</p>
 
-            <p style="font-weight: bold;">Player A does not have to be honest about their real answer.</p> 
-
-            <p>Player B will answer each question twice. First, before receiving any information from player A, and then again after receiving information from player A. Sometimes this information will be the advice left by player A (advice), other times it will be accurate information showing player A’s actual answer (spied information). On some questions player B can choose whether to receive advice or spied information.</p>
-
-            <p>After providing your answer(s), you will not be told whether your answer was correct or not.</p>
+            <p id = "meta_instruct"></p>
 
         </div>
 
         <div id = "Second_instructions" style = "display:none;">
 
-            <p id = "My_role" style="font-weight: bold;"></p>
+            <p id = "My_role"></p>
 
-            <p>During the study, a bonus fund will be accumulated. On each question, $0.20 will be added to the bonus fund if both players answer correctly, $0.10 will be added to the bonus fund if just one player answers correctly, and nothing will be added if neither player answers correctly. At the end of the experiment, this bonus fund will be distributed between the players as follows (you will be asked to recall this information on the following page):</p>
-
-            <p id = "Bonus" style="font-weight: bold;"></p> 
+            <p>Whenever either player gets a question right, <span id = "Bonus_Instruct" style="font-weight: bold;"></span></p>
 
         </div>
 
