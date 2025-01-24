@@ -99,9 +99,9 @@ function generateDots(transmitted_blueDots, transmitted_yellowDots) {
         height = 400;
         if(Player == "A"){
             // generate the array for player 1
-            blueDots = Math.floor(Math.random() * 21); // Generate a random number of blue dots between 0 and 10.
-            yellowDots = 20 - blueDots // yellow and blue dots always add up to 10.
-            if(blueDots < 20){
+            blueDots = Math.floor(Math.random() * 51); // Generate a random number of blue dots between 0 and 10.
+            yellowDots = 50 - blueDots // yellow and blue dots always add up to 10.
+            if(blueDots < 50){
                 blueDots = blueDots + Math.round(Math.random()) // To allow there to be odd differences. 
             }
             yellowDots = yellowDots + 2 // Note, you must add at least 1. Otherwise, if there are 10 blue dots, there will be 0 yellow dots. 
@@ -110,16 +110,16 @@ function generateDots(transmitted_blueDots, transmitted_yellowDots) {
             // Its a player 2 question, so it must be the same but more difficult
             blueDots = transmitted_blueDots
             yellowDots = transmitted_yellowDots
-            yellowDots = yellowDots + 4
-            blueDots = blueDots + 4
+            yellowDots = yellowDots + 5
+            blueDots = blueDots + 5
         }
 
         excess = blueDots - yellowDots // excess is how many more blue than yellow dots
         numDots = blueDots + yellowDots
         dots = [];
         sizes = [];
-        rMin = 30; // The dots' minimum radius.
-        rMax = 30;
+        rMin = 20; // The dots' minimum radius.
+        rMax = 20;
         horizontalOffset = (window.innerWidth - width) / 2;
 
         paper = Raphael(horizontalOffset, 200, width, height);

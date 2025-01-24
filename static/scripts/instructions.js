@@ -102,9 +102,9 @@ function generateDots () {
         // Display parameters
         width = 600;
         height = 400;
-        blueDots = Math.floor(Math.random() * 11); // Generate a random number of blue dots between 0 and 10.
-        yellowDots = 10 - blueDots
-        if(blueDots < 10){
+        blueDots = Math.floor(Math.random() * 51); // Generate a random number of blue dots between 0 and 10.
+        yellowDots = 50 - blueDots
+        if(blueDots < 50){
            blueDots = blueDots + Math.round(Math.random()) // To allow there to be odd differences 
         }
         if(Questions < 3){
@@ -113,16 +113,16 @@ function generateDots () {
             blueDots = blueDots + 2
         } else {
             // Its a player 2 question, so make it a bit harder. There will be a maximum of 19 dots on screen
-            yellowDots = yellowDots + 4
-            blueDots = blueDots + 4
+            yellowDots = yellowDots + 7
+            blueDots = blueDots + 7
         }
 
         excess = blueDots - yellowDots
         numDots = blueDots + yellowDots
         dots = [];
         sizes = [];
-        rMin = 30; // The dots' minimum radius.
-        rMax = 30;
+        rMin = 20; // The dots' minimum radius.
+        rMax = 20;
         horizontalOffset = (window.innerWidth - width) / 2;
 
         paper = Raphael(horizontalOffset, 200, width, height);
