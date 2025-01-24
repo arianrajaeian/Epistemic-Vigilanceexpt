@@ -123,7 +123,9 @@ class Epivigi(Experiment):
             their_node = my_node.neighbors(direction = "from")[0]
             their_participant = their_node.participant
             my_score = sum(1 for info in my_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
+            my_wrongs = 20 - my_score # Assuming there are 20 questions total
             their_score = sum(1 for info in their_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
+            their_wrongs = 20 - their_score
             total_bonus = (my_score + their_score) * 0.10
 
             if my_node.network.condition == "Cooperative":
@@ -132,16 +134,8 @@ class Epivigi(Experiment):
                 their_bonus = total_bonus / 2
 
             elif my_node.network.condition == "Competitive":
-                # Winner takes all
-                if my_score > their_score:
-                    my_bonus = my_score * 0.10 # Could do 0.20 here instead?
-                    their_bonus = 0 # Do you think this is too harsh (loser getting no bonus at all). They could get half?
-                elif my_score < their_score:
-                    my_bonus = 0
-                    their_bonus = their_score * 0.10
-                else: # Scores are equal, so just get your personal pot
-                    my_bonus = my_score * 0.10
-                    their_bonus = their_score * 0.10 # And here
+               my_bonus = (my_score + their_wrongs) * 0.10
+               their_bonus = (their_score + my_wrongs) * 0.10
 
             elif my_node.network.condition == "Neutral":
                 # Playing for your own pot only
