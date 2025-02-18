@@ -232,7 +232,7 @@ function displayPage(){
     if(condition == "Cooperative"){
         $("#Bonus_Instruct").html("both players earn a $0.05 bonus. As such, both players benefit from each other's performance.");
     } else if (condition == "Competitive"){
-        $("#Bonus_Instruct").html("$0.10 is added to their bonus fund. However, only the player who got the most questions right will actually receive their bonus fund: The other player will receive no bonus. As such, players benefit from outperforming their partner.");
+        $("#Bonus_Instruct").html("$0.10 is added to their bonus fund. Whenever either player gets a question wrong, $0.10 is added to the other player's bonus fund. As such, players benefit from their partner performing poorly.");
     } else if (condition == "Neutral"){
         $("#Bonus_Instruct").html("they earn a $0.10 bonus. As such, each player benefits from their own performance, regardless of their partner's performance.");
     }
@@ -265,7 +265,7 @@ function determineCondition(){
     if(Condition == "Cooperative"){
         correctCondition = "Both players earn a $0.05 bonus"
     } else if(Condition == "Competitive"){
-        correctCondition = "$0.10 is added to their bonus fund. The player that gets the most questions right will receive their bonus fund. The other player will receive no bonus"
+        correctCondition = "$0.10 is added to their bonus fund. When a player gets a question wrong, $0.10 is added to the bonus fund of the other player"
     } else if(Condition == "Neutral"){
        correctCondition = "They earn a $0.10 bonus" 
     }
