@@ -102,20 +102,13 @@ function generateDots () {
         // Display parameters
         width = 600;
         height = 400;
-        blueDots = Math.floor(Math.random() * 51); // Generate a random number of blue dots between 0 and 10.
-        yellowDots = 50 - blueDots
-        if(blueDots < 50){
+        blueDots = Math.floor(Math.random() * 41); // Generate a random number of blue dots between 0 and 40.
+        yellowDots = 40 - blueDots
+        if(blueDots < 40){
            blueDots = blueDots + Math.round(Math.random()) // To allow there to be odd differences 
         }
-        if(Questions < 3){
-            // Its a player 1 question. There will be a maximum of 15 dots on screen
-            yellowDots = yellowDots + 2 // Note, you must add at least 1. Otherwise, if there are 10 blue dots, there will be 0 yellow dots. 
-            blueDots = blueDots + 2
-        } else {
-            // Its a player 2 question, so make it a bit harder. There will be a maximum of 19 dots on screen
-            yellowDots = yellowDots + 7
-            blueDots = blueDots + 7
-        }
+        blueDots = blueDots + 10
+        yellowDots = yellowDots + 10
 
         excess = blueDots - yellowDots
         numDots = blueDots + yellowDots
