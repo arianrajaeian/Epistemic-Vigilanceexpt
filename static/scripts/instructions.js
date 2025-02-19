@@ -230,7 +230,7 @@ function displayPage(){
         $("#Bonus_Instruct").html("they earn a $0.10 bonus. As such, each player benefits from their own performance, regardless of their partner's performance.");
     }
     if (metacognition == "Yes") {
-        $("#meta_instruct").html("Player 1 will give advice on what they think the answer is, as well as how confident they are on their answer.");
+        $("#meta_instruct").html("Player 1 will give advice on what they think the answer is, as well as how confident they are in their answer.");
     } else {
         $("#meta_instruct").html("Player 1 will give advice on what they think the answer is.");
     }
