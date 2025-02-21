@@ -65,13 +65,9 @@ function continueTrial(){
         if (Questions == 5){
             dallinger.goToPage('instructions/Instructions_2');
         } 
-        else if(Questions < 3){
-            displayPageElements();
-            $("#Small_header").html("You are about to see an example of a player 1 question. When you are ready, click the button below to reveal the image.");
-        } 
         else if(Questions < 5){
             displayPageElements();
-            $("#Small_header").html("You are about to see an example of a player 2 question. When you are ready, click the button below to reveal the image.");
+            $("#Small_header").html("You are about to see a practice question. When you are ready, click the button below to reveal the image.");
         }
     } else {       
         generateDots();
