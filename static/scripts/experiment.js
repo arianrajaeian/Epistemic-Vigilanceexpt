@@ -104,8 +104,8 @@ function generateDots(transmitted_blueDots, transmitted_yellowDots) {
             if(blueDots < 40){
                 blueDots = blueDots + Math.round(Math.random()) // To allow there to be odd differences. 
             }
-            yellowDots = yellowDots + 10 // Note, you must add at least 1. Otherwise, if there are 10 blue dots, there will be 0 yellow dots. 
-            blueDots = blueDots + 10            
+            yellowDots = yellowDots + 5 // Note, you must add at least 1. Otherwise, if there are 10 blue dots, there will be 0 yellow dots. 
+            blueDots = blueDots + 5            
         } else {
             // Its a player 2 question, so it must be the same but more difficult
             blueDots = transmitted_blueDots

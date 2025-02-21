@@ -107,8 +107,8 @@ function generateDots () {
         if(blueDots < 40){
            blueDots = blueDots + Math.round(Math.random()) // To allow there to be odd differences 
         }
-        blueDots = blueDots + 10
-        yellowDots = yellowDots + 10
+        blueDots = blueDots + 5
+        yellowDots = yellowDots + 5
 
         excess = blueDots - yellowDots
         numDots = blueDots + yellowDots
