@@ -299,7 +299,7 @@ function submitRevision(revision){
 }
 
 function createOutcomeInfo(finalAnswer){
-    if(Math.abs(finalAnswer - excess) <= 1){
+    if(Math.abs(finalAnswer - excess) <= 3){
         Outcome = "Correct";
     } else {
         Outcome = "Incorrect";

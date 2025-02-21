@@ -193,7 +193,7 @@ function submitAnswer(answer){
     $('#Guessslider').data('ionRangeSlider').reset();
     $("#Next").show();
     $("#Answer").html("The correct answer was: " + excess)
-    if(Math.abs(answer - excess) <= 1){
+    if(Math.abs(answer - excess) <= 3){
        $("#Feedback").html("Your answer would be marked as correct.") 
     } else {
        $("#Feedback").html("Your answer would be marked as incorrect.")
