@@ -252,11 +252,14 @@ function nextButton2(){
 function determineCondition(){
     Condition = dallinger.storage.get("condition");
     if(Condition == "Cooperative"){
-        correctCondition = "Both players earn a $0.05 bonus"
+        comprehensionTwo = "Both players earn a $0.05 bonus";
+        comprehensionThree = "Neither player earns a bonus";
     } else if(Condition == "Competitive"){
-        correctCondition = "$0.10 is added to their bonus fund. When a player gets a question wrong, $0.10 is added to the bonus fund of the other player"
+        comprehensionTwo = "They earn a $0.10 bonus";
+        comprehensionThree = "The other player earns a $0.10 bonus";
     } else if(Condition == "Neutral"){
-       correctCondition = "They earn a $0.10 bonus" 
+       comprehensionTwo = "They earn a $0.10 bonus";
+       comprehensionThree = "Neither player earns a bonus"; 
     }
     my_node_id = dallinger.storage.get("my_node_id");
 }
@@ -270,13 +273,15 @@ function pingButton(type, response){
       $("#Advice").html(response); 
     } else if(type == "Bonus"){
       $("#Bonus").html(response);  
+    } else if (type == "Wrong"){
+      $("#Wrong").html(response);
     }
 }
 
 function attemptAdvance(){
     questionAttempts = questionAttempts + 1
     pageAttempts = pageAttempts + 1
-    if($("#Task").text() == "True" && $("#Answer").text() == "True" && $("#Advice").text() == "True" && $("#Bonus").text() == correctCondition){
+    if($("#Task").text() == "True" && $("#Answer").text() == "True" && $("#Advice").text() == "True" && $("#Bonus").text() == comprehensionTwo && $("#Wrong").text() == comprehensionThree){
         dallinger.createInfo(my_node_id ,{
             contents: questionAttempts,
             info_type: 'Comp_Info'
