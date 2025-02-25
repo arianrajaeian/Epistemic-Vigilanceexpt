@@ -11,7 +11,8 @@
         <div id = "feedback_div" style = "display:none">
 
         <h4 id = "Answer"> </h4>
-        <h4 id = "Advice">The advice that player 2 will see for this question is: 0</h4>
+        <h4 id = "Advice">Player 2 will see your answer as 0</h4>
+        <h4 id="Confidence"></h4>
 
         </div>
 
@@ -31,9 +32,9 @@
         </div>
     <div class = "row" id = "Slider" style = "display:none;">
         <!---First slider for guessinng-->
-        <div class = "col-md-12 text-center">
+        <div class = "col-md-12 text-center" style="margin-top: 40px;">
             <div class = "slidecontainer">
-                <label>Indicate your answer using the slider.</label>
+                <label id="guessLabel" style="font-size: 20px; font-weight: bold;">Indicate your answer using the slider.</label>
                 <input id="Guessslider" type="text" class="js-range-slider" name="my_range" value=""data-min="-50"
                 data-max="50"
                 data-from="0">
@@ -41,10 +42,8 @@
         </div>
         <!---confidence slider-->
         <div class="col-md-12 text-center" id="secondSlider" style="display:none; margin-top: 50px;">
-            <h4 style="text-align: left">How confident are you in your answer?</h4>
-            <h4 id="Confidence" style="text-align: left">The confidence score that player 2 will see for this question is: 5 out of 10</h4>
             <div class="slidecontainer">
-                <label>Rate your confidence using the slider.</label>
+                <label style="font-size: 20px; font-weight: bold;">What would you like to tell Player 2 your confidence is?</label>
                 <input id="ConfSlider" type="text" class="js-range-slider" name="second_range" value=""
                 data-min="0"
                 data-max="10"

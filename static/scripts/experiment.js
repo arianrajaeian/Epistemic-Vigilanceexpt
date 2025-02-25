@@ -184,6 +184,7 @@ function allowGuess(){ // prompts participant to guess number of dots
     $("#Small_header").show();
     $("#Small_header").html("How many more blue circles were there than yellow circles? When you are happy with your answer, click the button below.");
     $("#Slider").show(); //shows slider
+    $("#guessLabel").html("Indicate your answer using the slider.")
     $("#secondSlider").hide(); // hide the confidence slider.
     $("#Submit_answer").show(); // allows you to submit answer. it calls the submitAnswer() function on click.
 }
@@ -201,14 +202,17 @@ function submitAnswer(answer){
 
 function adviceDiv(answer){
     // Show the information for player 1
-    $("#Advice").html("The advice that player 2 will see for this question is: 0");
+    $("#Advice").html("Player 2 will see your answer as 0");
+    $("#Confidence").show();
     $("#Submit_advice").show(); // button that allows you to submit
     $("#feedback_div").show(); // overall div
-    $("#Small_header").html("What advice would you like to leave for player 2?");
-    $("#Answer").html("You answered: " + answer);
+    $("#Small_header").html("You answered: " + answer);
+    $("#guessLabel").html("What would you like to tell Player 2 your answer was?")
     if (metacognition == "Yes"){
-        $("#Confidence").html("The confidence score that player 2 will see for this question is: 5 out of 10");
+        $("#Confidence").html(" and your confidence as 5 out of 10.");
         $("#secondSlider").show(); // show the confidence slider
+    } else {
+        $("#Confidence").html(".");
     }
     createOutcomeInfo(answer); // calls this function
     Answer = answer; //not sure why, but it saves what you answered for your answer as "Answer"
@@ -336,13 +340,13 @@ function createJSONInfo(){
 function updatePoints(value) {
   // Code for slider to update text displayed
   value = parseInt(value);
-  $("#Advice").html("The advice that player 2 will see for this question is: " + value);
+  $("#Advice").html("Player 2 will see your answer as " + value);
 } // add one for the confidence player 2 will see is: + value. 
 
 function updateConfidence(conf_level) {
     // Code for slider to update text displayed
     conf_level = parseInt(conf_level); // turns the string into an integer.
-    $("#Confidence").html("The confidence score that player 2 will see for this question is: " + conf_level + " out of 10");
+    $("#Confidence").html(" and your confidence as " + conf_level + " out of 10.");
   } 
 
 function disableButtons(){ // disables buttons
