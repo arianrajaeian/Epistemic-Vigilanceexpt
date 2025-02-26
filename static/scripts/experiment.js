@@ -202,17 +202,17 @@ function submitAnswer(answer){
 
 function adviceDiv(answer){
     // Show the information for player 1
-    $("#Advice").html("Player 2 will see your answer as 0");
-    $("#Confidence").show();
+    $("#advice_score").html("0");
     $("#Submit_advice").show(); // button that allows you to submit
     $("#feedback_div").show(); // overall div
     $("#Small_header").html("You answered: " + answer);
     $("#guessLabel").html("What would you like to tell Player 2 your answer was?")
     if (metacognition == "Yes"){
-        $("#Confidence").html(" and your confidence as 5 out of 10.");
+        $("#confidence_score").html("5");
+        $("#Confidence").show();
         $("#secondSlider").show(); // show the confidence slider
     } else {
-        $("#Confidence").html(".");
+        $("#Confidence").hide();
     }
     createOutcomeInfo(answer); // calls this function
     Answer = answer; //not sure why, but it saves what you answered for your answer as "Answer"
@@ -340,13 +340,13 @@ function createJSONInfo(){
 function updatePoints(value) {
   // Code for slider to update text displayed
   value = parseInt(value);
-  $("#Advice").html("Player 2 will see your answer as " + value);
+  $("#advice_score").html(value);
 } // add one for the confidence player 2 will see is: + value. 
 
 function updateConfidence(conf_level) {
     // Code for slider to update text displayed
     conf_level = parseInt(conf_level); // turns the string into an integer.
-    $("#Confidence").html(" and your confidence as " + conf_level + " out of 10.");
+    $("#confidence_score").html(conf_level);
   } 
 
 function disableButtons(){ // disables buttons
