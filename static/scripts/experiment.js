@@ -234,15 +234,15 @@ function socialDiv(answer){
     resetTimer();     
     $("#Info_div").show();
     $("#Submit_revision").show();      
-    $("#Small_header").html("You may now amend your guess if you wish.");
-    $("#first_guess").html("Your first answer was: " + answer);  
+    $("#Small_header").html("Your first answer was: " + answer);
+    $("#first_guess").html("You may now amend your answer if you wish.");  
     displayAdvice();
 } 
 
 function displayAdvice(){
     $("#button_div").hide();    
     $("#extra_info").hide();
-    $("#Social_info").html("<strong>The advice</strong> player 1 left for this question was: " + A_advice); //also state their confidence.
+    $("#Social_info").html("Player 1 rated their answer as " + A_advice); //also state their confidence.
     if (metacognition == "Yes"){
         $("#conf_info").html("Player 1 rated their confidence in their answer as: " + A_confidence + " out of 10.")
     }
