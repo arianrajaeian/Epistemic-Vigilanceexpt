@@ -182,7 +182,7 @@ function presentDisplay (argument) {
 function allowGuess(){ // prompts participant to guess number of dots
     $("#stimulus_div").hide();
     $("#Small_header").show();
-    $("#Small_header").html("How many more blue circles were there than yellow circles? When you are happy with your answer, click the button below.");
+    $("#Small_header").html("How many more blue circles were there than yellow circles?");
     $("#Slider").show(); //shows slider
     $("#guessLabel").html("Indicate your answer using the slider.")
     $("#secondSlider").hide(); // hide the confidence slider.
