@@ -73,7 +73,10 @@ class Epivigi(Experiment):
             else: # lowest_nodes will be 1
                 available_networks = [n for n in networks if n.size() == 1 and n.ready_for_B == "Yes"] # Create a list of networks with 1 node that have signalled they are ready for Player 2 (their player 1 is finished). 
 
-            return random.choice(available_networks) # Pick an available network at random
+            if available_networks:
+                return random.choice(available_networks) # Pick an available network at random
+            else:
+                return None
 
         else:
             return None 
