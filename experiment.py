@@ -16,6 +16,7 @@ conditions = ["Cooperative", "Competitive", "Neutral"]
 metacognition = ["Yes", "No"]
 
 N = 1 # How many networks and participants do you want? This also controls how many more participants are recruited by recruit()
+Nq = 4 # How many questions do ppts answer? This affects the bonus calculation and data check functions, note it does not propogate to the front end!
 
 class Epivigi(Experiment):
     """Define the structure of the experiment."""
@@ -123,10 +124,10 @@ class Epivigi(Experiment):
             their_node = my_node.neighbors(direction = "from")[0]
             their_participant = their_node.participant
             my_score = sum(1 for info in my_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
-            my_wrongs = 20 - my_score # Assuming there are 20 questions total
+            my_wrongs = Nq - my_score # Assuming there are 20 questions total
             their_score = sum(1 for info in their_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
-            their_wrongs = 20 - their_score
             total_bonus = (my_score + their_score) * 0.10
+            their_wrongs = Nq - their_score
 
             if my_node.network.condition == "Cooperative":
                 # Total pot split between both players
@@ -189,7 +190,7 @@ class Epivigi(Experiment):
 
         """
         self.log(len(participant.infos(type = self.models.Answer_Info)))
-        if len(participant.infos(type = self.models.Answer_Info)) != 4: # We expect the participant to have 20 answer infos (record of correct/incorrect) if all has worked
+        if len(participant.infos(type = self.models.Answer_Info)) != Nq: # We expect the participant to have 20 answer infos (record of correct/incorrect) if all has worked
             try: # This try block is necessary to catch cases where players are sent to the woops page (by then, they have not even created a Node).
                 node = participant.nodes()[0] 
                 node.network.finished = "No" # Signal that the network has still not finished
