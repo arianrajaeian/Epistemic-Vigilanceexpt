@@ -65,7 +65,7 @@ function continueTrial(){
         if (Questions == 5){
             dallinger.goToPage('instructions/Instructions_2');
         } 
-        else if(Questions < 5){
+        else if(Questions < 5){ // We could consider doing fewer practice questions. Before it was two for player 1 and two for player 2. 2/3 may be enough here.
             displayPageElements();
             $("#Small_header").html("You are about to see a practice question. When you are ready, click the button below to reveal the image.");
         }
