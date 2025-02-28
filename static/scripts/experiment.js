@@ -242,9 +242,9 @@ function socialDiv(answer){
 function displayAdvice(){
     $("#button_div").hide();    
     $("#extra_info").hide();
-    $("#Social_info").html("Player 1 rated their answer as " + A_advice); //also state their confidence.
-    if (metacognition == "Yes"){
-        $("#conf_info").html("Player 1 rated their confidence in their answer as: " + A_confidence + " out of 10.")
+    $("#Social_info").html("Player 1 says they answered " + A_advice); //also state their confidence.
+    if (metacognition == "Yes") {
+        $("#conf_info").html(" and rated their confidence in their answer as " + A_confidence + " out of 10")
     }
     resps = { // need to understand this better, but defines its content as player A's advice
         "Question" : Questions,
