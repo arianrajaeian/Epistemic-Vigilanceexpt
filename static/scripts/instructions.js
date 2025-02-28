@@ -213,9 +213,13 @@ function retrieveAgent(){
 
 function displayPage(){
     if(node_type == "Drone_node"){
-        $("#My_role").html("You will be player 1 in this study. This means you will answer each question once. After answering each question, you will leave advice for player 2 about what they should answer.");
+        if (metacognition == "Yes") {
+            $("#My_role").html("<b>You are player 1:</b> You will answer each question, and then you will tell player 2 what you answered, as well as how confident you are. You do not have to be honest, it is up to you what you tell player 2.");
+        } else {
+            $("#My_role").html("<b>You are player 1:</b> You will answer each question, and then you will tell player 2 what you answered. You do not have to be honest, it is up to you what you tell player 2.");
+        }
     } else {
-        $("#My_role").html("You will be player 2 in this study. This means you will answer each question twice. First without receiving any information from player 1, and then again after receiving information from player 1.");
+        $("#My_role").html("<b>You are player 2:</b> You will answer each question twice. First without receiving any information from player 1, and then again after receiving information from player 1. Player 1 does not have to be honest, it is up to them what they tell you.");
     }
 
     if(condition == "Cooperative"){
