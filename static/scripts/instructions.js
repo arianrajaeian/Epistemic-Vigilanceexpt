@@ -176,7 +176,7 @@ function presentDisplay (argument) {
 function allowGuess(){
     $("#stimulus_div").hide();
     $("#Small_header").show();
-    $("#Small_header").html("How many more blue circles were there than yellow circles? When you are happy with your answer, click the button below.");
+    $("#Small_header").html("How many more blue circles were there than yellow circles?");
     $("#Slider").show();
     $("#Submit").show();
 }
