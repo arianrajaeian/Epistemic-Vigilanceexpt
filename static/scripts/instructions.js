@@ -223,11 +223,11 @@ function displayPage(){
     }
 
     if(condition == "Cooperative"){
-        $("#Bonus_Instruct").html("both players earn a $0.05 bonus. As such, both players benefit from each other's performance.");
+        $("#Bonus_Instruct").html("both players earn a $0.05 bonus. As such, <b>both players benefit from each other's performance</b>.");
     } else if (condition == "Competitive"){
-        $("#Bonus_Instruct").html("$0.10 is added to their bonus fund. Whenever either player gets a question wrong, $0.10 is added to the other player's bonus fund. As such, players benefit from their partner performing poorly.");
+        $("#Bonus_Instruct").html("$0.10 is added to their bonus fund. Whenever either player gets a question wrong, $0.10 is added to the <i>other</i> player's bonus fund. As such, <b>players benefit from their partner performing poorly</b>.");
     } else if (condition == "Neutral"){
-        $("#Bonus_Instruct").html("they earn a $0.10 bonus. As such, each player benefits from their own performance, regardless of their partner's performance.");
+        $("#Bonus_Instruct").html("they earn a $0.10 bonus. As such, <b>each player benefits from their own performance, regardless of their partner's performance</b>.");
     }
     if (metacognition == "Yes") {
         $("#meta_instruct").html("Player 1 will give advice on what they think the answer is, as well as how confident they are in their answer.");
