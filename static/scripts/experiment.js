@@ -51,7 +51,7 @@ function extractInfo(){
     //if(Contents.Question != Questions){
        // dallinger.goToPage('survey');
     //};
-    return Promise.resolve(); // huh
+    return Promise.resolve(); // huh RW - Aha! yeah this is confusing. It's the promise Syntax in JavaScript. It ensures that this function has to finish before the code tries to move on. 
 }
 
 async function continueTrial() { // this function moves them along from question to question.
@@ -72,7 +72,7 @@ async function continueTrial() { // this function moves them along from question
       });                  
     } else { 
       if (Player == "B") { // player 2 has to wait for dallinger to transmit player A's data for that question first.
-        await extractInfo();
+        await extractInfo(); // It's this bit here. If the bits underneath try to resolve before extractInfo finishes, then there is information missing. It's a pain, but it happened to me a lot. Using "await" and "promise resolve" ensures this doesn't happen. 
       }
       resetTimer();
       $("#Main_header").html("Question " + Questions + " / " + numQuestions);          
