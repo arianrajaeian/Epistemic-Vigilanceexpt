@@ -139,7 +139,7 @@ class Epivigi(Experiment):
 
             elif my_node.network.condition == "Neutral":
                 # Playing for your own pot only
-                my_bonus = my_bonus = my_score * 0.10
+                my_bonus = my_score * 0.10
                 their_bonus = their_score * 0.10
 
             my_bonus = round(my_bonus,2)
