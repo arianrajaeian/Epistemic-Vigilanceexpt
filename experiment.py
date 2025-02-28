@@ -126,11 +126,11 @@ class Epivigi(Experiment):
             my_score = sum(1 for info in my_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
             my_wrongs = Nq - my_score # Assuming there are 20 questions total
             their_score = sum(1 for info in their_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
-            total_bonus = (my_score + their_score) * 0.10
             their_wrongs = Nq - their_score
 
             if my_node.network.condition == "Cooperative":
                 # Total pot split between both players
+                total_bonus = (my_score + their_score) * 0.10
                 my_bonus = total_bonus / 2
                 their_bonus = total_bonus / 2
 
