@@ -234,7 +234,7 @@ function socialDiv(answer){
     resetTimer();     
     $("#Info_div").show();
     $("#Submit_revision").show();      
-    $("#Small_header").html("You answered was: " + answer);
+    $("#Small_header").html("You answered: " + answer);
     $("#first_guess").html("You may amend your answer if you wish.");  
     displayAdvice();
 } 
