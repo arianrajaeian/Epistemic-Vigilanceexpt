@@ -34,7 +34,7 @@ class Epivigi(Experiment):
         self.models = models
         self.experiment_repeats = N # How many networks?
         self.initial_recruitment_size = 1
-        self.inactivity_time_limit =  2700 # How long (seconds) of no response before a node is failed and the participant replaced
+        self.inactivity_time_limit =  2700 # This will want changing before the experiment is ran. I think I used about 300 from memory. 
         self.known_classes = {
             "Drone" : models.Drone,
             "Probe" : models.Probe,
@@ -146,8 +146,8 @@ class Epivigi(Experiment):
                 my_bonus = my_score * 0.10
                 their_bonus = their_score * 0.10
 
-            my_bonus = round(my_bonus,2)
-            their_bonus = round(their_bonus,2)
+            my_bonus = min(round(my_bonus,2), 2.00)
+            their_bonus = min(round(their_bonus,2),2.00)
 
             # Record the bonus amounts as a property on the nodes
             my_node.bonus = my_bonus
