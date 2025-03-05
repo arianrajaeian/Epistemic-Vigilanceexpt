@@ -1,20 +1,5 @@
 {
     "device_compatibility" : [
         "desktop"
-    ],
-    "eligibility_requirements": [
-        {
-            "_cls": "web.eligibility.models.PreviousStudiesEligibilityRequirement",
-            "attributes": [
-                {
-                    "id": "64c8c28f9d857d49c43ca052",
-                    "value": true
-                },
-                {
-                    "id": "64cb9a6f831e75eec21b93ad",
-                    "value": true
-                }
-            ]
-        }
     ]
 }

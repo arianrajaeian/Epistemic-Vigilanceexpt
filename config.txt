@@ -3,8 +3,6 @@ auto_recruit = false
 webdriver_type = chrome_headless
 
 [MTurk]
-title = Circle estimation game
-description = Estimate differences in the number of circles while learning from others
 keywords = Psychology, numerosity, copying, social learning
 base_payment = 2.00
 lifetime = 24
@@ -17,6 +15,15 @@ organization_name = Eccolab@ASU
 browser_exclude_rule = MSIE, mobile, tablet
 group_name = Pilot1
 assign_qualifications = true
+
+[Prolific]
+title = Circle estimation game
+description = Estimate differences in the number of circles while learning from others
+prolific_project = Metacognition, Arian 2025
+prolific_estimated_completion_minutes = 20
+publish_experiment = true
+prolific_recruitment_config = file:prolific_config.json
+
 
 [Database]
 database_url = postgresql://postgres@localhost/dallinger
