@@ -30,7 +30,7 @@ redis_size = premium-0
 host = 0.0.0.0
 clock_on = false
 logfile = -
-heroku_python_version = 3.11.7
+heroku_python_version = 3.13.2
 
 [Docker]
 docker_image_base_name = ghcr.io/dallinger/dallinger/epistemic_vigilance
