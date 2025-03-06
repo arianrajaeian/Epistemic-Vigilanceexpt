@@ -21,7 +21,7 @@ title = Circle estimation game
 description = Estimate differences in the number of circles while learning from others
 prolific_project = Metacognition, Arian 2025
 prolific_estimated_completion_minutes = 20
-publish_experiment = true
+publish_experiment = false
 prolific_recruitment_config = file:prolific_config.json
 
 
