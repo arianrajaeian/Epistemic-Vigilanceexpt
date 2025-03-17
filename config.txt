@@ -1,6 +1,7 @@
 [Experiment]
 auto_recruit = false
 webdriver_type = chrome_headless
+recruiter = prolific
 
 [MTurk]
 keywords = Psychology, numerosity, copying, social learning
