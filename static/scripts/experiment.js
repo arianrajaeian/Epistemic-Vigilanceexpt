@@ -1,6 +1,6 @@
 var Player
 var Questions = 0 // Leave this as 0, this is a counter for the number of questions the participant has done. 
-var numQuestions = 4 // How many questions in total? changed it from 20 to 5
+var numQuestions = 20 // How many questions in total? changed it from 20 to 5
 var transmitted_blueDots = 0
 var transmitted_yellowDots = 0
 var time = 0 // How long have participants spent
