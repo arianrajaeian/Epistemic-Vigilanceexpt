@@ -6,3 +6,4 @@ templates/OLD ad.html
 PROLIFIC CONFIG BIT.txt
 prolific_config.json
 .DS_Store
+__pycache__/*
