@@ -127,7 +127,7 @@ class Epivigi(Experiment):
             their_node = my_node.neighbors(direction = "from")[0]
             their_participant = their_node.participant
             my_score = sum(1 for info in my_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
-            my_wrongs = Nq - my_score # Assuming there are 20 questions total
+            my_wrongs = Nq - my_score
             their_score = sum(1 for info in their_node.infos(type=self.models.Answer_Info) if info.contents == "Correct")
             their_wrongs = Nq - their_score
 
