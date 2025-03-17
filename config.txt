@@ -1,6 +1,7 @@
 [Experiment]
 auto_recruit = false
 recruiter = prolific
+mode = live
 
 [Prolific]
 title = Circle estimation game
