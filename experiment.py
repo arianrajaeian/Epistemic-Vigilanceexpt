@@ -33,7 +33,7 @@ class Epivigi(Experiment):
 
         self.models = models
         self.experiment_repeats = N # How many networks?
-        self.initial_recruitment_size = 1
+        self.initial_recruitment_size = N
         self.inactivity_time_limit =  2700 # This will want changing before the experiment is ran. I think I used about 300 from memory. 
         self.known_classes = {
             "Drone" : models.Drone,
