@@ -15,7 +15,7 @@ logger = logging.getLogger(__file__)
 conditions = ["Cooperative", "Competitive", "Neutral"]
 metacognition = ["Yes", "No"]
 
-N = 5 # How many networks and participants do you want? This also controls how many more participants are recruited by recruit()
+N = 6 # How many networks and participants do you want? This also controls how many more participants are recruited by recruit()
 Nq = 20 # How many questions do ppts answer? This affects the bonus calculation and data check functions, note it does not propogate to the front end!
 
 class Epivigi(Experiment):
@@ -53,8 +53,9 @@ class Epivigi(Experiment):
     def create_network(self):
         """Return a new network."""
         network = self.models.RChain(max_size = 2) # create a chain network.
-        network.condition = random.choice(conditions) # choose condition by random.
-        network.metacognition = random.choice(metacognition) # randomly choose if there is metacognition or not.
+        this_networks_id_minus_one = len(self.networks())
+        network.condition = conditions[this_networks_id_minus_one % len(conditions)]
+        network.metacognition = metacognition[this_networks_id_minus_one % len(metacognition)]
         network.finished = "No"
         network.ready_for_B = "No"
         return network
