@@ -259,8 +259,8 @@ function determineCondition(){
         comprehensionTwo = "Both players earn a $0.05 bonus";
         comprehensionThree = "Neither player earns a bonus";
     } else if(Condition == "Competitive"){
-        comprehensionTwo = "They earn a $0.10 bonus";
-        comprehensionThree = "The other player earns a $0.10 bonus";
+        comprehensionTwo = "They earn a $0.05 bonus";
+        comprehensionThree = "The other player earns a $0.05 bonus";
     } else if(Condition == "Neutral"){
        comprehensionTwo = "They earn a $0.10 bonus";
        comprehensionThree = "Neither player earns a bonus"; 
