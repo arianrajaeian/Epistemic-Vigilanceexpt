@@ -138,8 +138,8 @@ class Epivigi(Experiment):
                 their_bonus = total_bonus / 2
 
             elif my_node.network.condition == "Competitive":
-               my_bonus = (my_score + their_wrongs) * 0.10
-               their_bonus = (their_score + my_wrongs) * 0.10
+               my_bonus = (my_score + their_wrongs) * 0.05
+               their_bonus = (their_score + my_wrongs) * 0.05
 
             elif my_node.network.condition == "Neutral":
                 # Playing for your own pot only
