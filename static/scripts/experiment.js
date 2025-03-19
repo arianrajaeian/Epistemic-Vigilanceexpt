@@ -322,6 +322,7 @@ function createJSONInfo(){
         "Yellow" : yellowDots,
         "Advice" : Advice,
         "Answer" : Answer,
+        "Correct Answer" : blueDots - yellowDots,
     };
     if (metacognition == "Yes"){
         resps["Confidence"] = Confidence;
