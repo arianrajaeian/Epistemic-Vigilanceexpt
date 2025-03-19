@@ -303,7 +303,7 @@ function submitRevision(revision){
 }
 
 function createOutcomeInfo(finalAnswer){
-    if(Math.abs(finalAnswer - excess) <= 3){
+    if(Math.abs(finalAnswer - excess) <= 5){
         Outcome = "Correct";
     } else {
         Outcome = "Incorrect";
