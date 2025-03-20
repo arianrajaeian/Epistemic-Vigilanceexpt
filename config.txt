@@ -24,6 +24,6 @@ num_dynos_web = 5
 num_dynos_worker = 3
 redis_size = premium-0
 host = 0.0.0.0
-clock_on = false
+clock_on = true
 logfile = -
 heroku_python_version = 3.11.7
