@@ -188,6 +188,7 @@ class Epivigi(Experiment):
                 their_bonus,
                 self.bonus_reason(),
                 )
+            their_participant.bonus = their_bonus
             return my_bonus
         else:
             return 0
