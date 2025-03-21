@@ -1,7 +1,6 @@
 """An experiment testing epistemic vigilance as a hypothesis to explain egocentric discounting"""
 
 import logging
-from dallinger import db
 from dallinger.config import get_config
 from dallinger.networks import Chain
 from dallinger.experiment import Experiment
@@ -82,32 +81,6 @@ class Epivigi(Experiment):
 
         else:
             return None 
-
-    def create_participant(
-        self,
-        worker_id,
-        hit_id,
-        assignment_id,
-        mode,
-        recruiter_name=None,
-        fingerprint_hash=None,
-        entry_information=None,
-    ):
-        """ Needed for prolific. When a new participant arrives we force a query of prolifics
-        participant statuses to check if anyone has returned. """
-        q = db.get_queue()
-        q.enqueue(recruiters.run_status_check)
-        participant = super(Epivigi, self).create_participant(
-            self,
-            worker_id,
-            hit_id,
-            assignment_id,
-            mode,
-            recruiter_name,
-            fingerprint_hash,
-            entry_information,
-        )
-        return participant
 
     def create_node(self, participant, network):
         """Create a Node for the participant. Varies based on whether the network already has a player 1"""
