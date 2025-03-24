@@ -15,7 +15,7 @@ logger = logging.getLogger(__file__)
 conditions = ["Cooperative", "Competitive", "Neutral"]
 metacognition = ["Yes", "No"]
 
-N = 6 # How many networks and participants do you want? This also controls how many more participants are recruited by recruit()
+N = 12 # How many networks and participants do you want? This also controls how many more participants are recruited by recruit()
 Nq = 20 # How many questions do ppts answer? This affects the bonus calculation and data check functions, note it does not propogate to the front end!
 
 class Epivigi(Experiment):
