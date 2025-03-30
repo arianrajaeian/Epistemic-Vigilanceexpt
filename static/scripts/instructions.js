@@ -256,14 +256,17 @@ function nextButton2(){
 function determineCondition(){
     Condition = dallinger.storage.get("condition");
     if(Condition == "Cooperative"){
-        comprehensionTwo = "Both players earn a $0.05 bonus";
-        comprehensionThree = "Neither player earns a bonus";
+        comprehensionTwo = "You earn $0.05";
+        comprehensionFour = "You earn $0.05";
+        comprehensionFive = "You earn $0";
     } else if(Condition == "Competitive"){
-        comprehensionTwo = "They earn a $0.05 bonus";
-        comprehensionThree = "The other player earns a $0.05 bonus";
+        comprehensionTwo = "You earn $0.05";
+        comprehensionFour = "You earn $0";
+        comprehensionFive = "You earn $0.05";
     } else if(Condition == "Neutral"){
-       comprehensionTwo = "They earn a $0.10 bonus";
-       comprehensionThree = "Neither player earns a bonus"; 
+       comprehensionTwo = "You earn $0.10";
+       comprehensionFour = "You earn $0";
+       comprehensionFive = "You earn $0"; 
     }
     my_node_id = dallinger.storage.get("my_node_id");
 }
@@ -271,21 +274,23 @@ function determineCondition(){
 function pingButton(type, response){
     if(type == "Task"){
       $("#Task").html(response);  
-    } else if(type == "Answer"){
-      $("#Answer").html(response);   
-    } else if(type == "Advice"){
-      $("#Advice").html(response); 
-    } else if(type == "Bonus"){
-      $("#Bonus").html(response);  
-    } else if (type == "Wrong"){
-      $("#Wrong").html(response);
+    } else if(type == "Q1"){
+      $("#Q1").html(response);   
+    } else if(type == "Q3"){
+      $("#Q3").html(response); 
+    } else if(type == "Q2"){
+      $("#Q2").html(response);  
+    } else if (type == "Q4"){
+      $("#Q4").html(response);
+    } else if (type == "Q5"){
+      $("#Q5").html(response)
     }
 }
 
 function attemptAdvance(){
     questionAttempts = questionAttempts + 1
     pageAttempts = pageAttempts + 1
-    if($("#Task").text() == "True" && $("#Answer").text() == "True" && $("#Advice").text() == "True" && $("#Bonus").text() == comprehensionTwo && $("#Wrong").text() == comprehensionThree){
+    if($("#Q1").text() == "True" && $("#Q2").text() == comprehensionTwo && $("#Q3").text() == "You earn $0" && $("#Q4").text() == comprehensionFour && $("#Q5").text() == comprehensionFive){
         dallinger.createInfo(my_node_id ,{
             contents: questionAttempts,
             info_type: 'Comp_Info'
