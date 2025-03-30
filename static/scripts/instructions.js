@@ -53,7 +53,7 @@ function nextButton(){
     } else if ($('#Two').is(':visible')){
         $("#Two").hide();
         $("#Three").show();
-        button.textContent = "Advance study (I'm done reading)"
+        button.textContent = "Next"
     } else if ($('#Three').is(':visible')){
         dallinger.goToPage('instructions/mocktrials')
     }
