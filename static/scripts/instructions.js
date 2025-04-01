@@ -275,28 +275,29 @@ function pingButton(type, response){
     if(type == "Task"){
       $("#Task").html(response);  
     } else if(type == "Q1"){
-      $("#Q1").html(response);   
-    } else if(type == "Q3"){
-      $("#Q3").html(response); 
+      $("#Q1").html(response);
+      Question_1 = response;  
     } else if(type == "Q2"){
-      $("#Q2").html(response);  
+      $("#Q2").html(response);
+      Question_2 = response; 
+    } else if(type == "Q3"){
+      $("#Q3").html(response);
+      Question_3 = response;  
     } else if (type == "Q4"){
       $("#Q4").html(response);
+      Question_4 = response;
     } else if (type == "Q5"){
-      $("#Q5").html(response)
+      $("#Q5").html(response);
+      Question_5 = response;
     }
 }
 
 function attemptAdvance(){
     questionAttempts = questionAttempts + 1
     pageAttempts = pageAttempts + 1
-    if($("#Q1").text() == "True" && $("#Q2").text() == comprehensionTwo && $("#Q3").text() == "You earn $0" && $("#Q4").text() == comprehensionFour && $("#Q5").text() == comprehensionFive){
-        dallinger.createInfo(my_node_id ,{
-            contents: questionAttempts,
-            info_type: 'Comp_Info'
-        }).done(function(resp){
-            dallinger.goToPage('experiment');
-        })  
+    if(Question_1 == "True" && Question_2 == comprehensionTwo && Question_3 == "You earn $0" && Question_4 == comprehensionFour && Question_5 == comprehensionFive){
+       CreateCompInfo();
+       dallinger.goToPage('experiment');  
     } else {
         $("#warning").show();
         if(pageAttempts == 2){
@@ -307,4 +308,20 @@ function attemptAdvance(){
             dallinger.goToPage('instructions/Instructions_2');  
         }
     }
+}
+
+function CreateCompInfo(){
+    resps = {
+        "Question 1" : Question_1,
+        "Question 2" : Question_2,
+        "Question 3" : Question_3,
+        "Question 4" : Question_4,
+        "Question 5" : Question_5,
+        "Question attempts": questionAttempts,
+    };
+    resps = JSON.stringify(resps);
+    dallinger.createInfo(my_node_id ,{
+        contents: resps,
+        info_type: 'Comp_Info'
+    })
 }
