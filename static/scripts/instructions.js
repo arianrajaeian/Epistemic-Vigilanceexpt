@@ -239,6 +239,7 @@ function displayPage(){
 function backButton2(){
     $("#Second_instructions").hide();
     $("#First_instructions").show();
+    $("#Instruction_header").html("Instructions: player roles")
     $("#Advance").hide();
     $("#Back").hide();
     $("#Next").show();
@@ -247,6 +248,7 @@ function backButton2(){
 function nextButton2(){
     $("#First_instructions").hide();
     $("#Second_instructions").show();
+    $("#Instruction_header").html("Instructions: bonus payments")
     $("#Advance").show();
     $("#Next").hide();
     $("#Back").show();
