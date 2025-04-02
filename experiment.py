@@ -44,6 +44,7 @@ class Epivigi(Experiment):
             "Second_guess" : models.Second_guess,
             "Social_info" : models.Social_info,
             "Comp_Info" : models.Comp_Info,
+            "Attempts_Info" : models.Attempts_Info,
             "Finished" : models.Finished,
         }
 

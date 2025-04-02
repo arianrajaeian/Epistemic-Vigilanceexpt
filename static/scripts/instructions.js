@@ -295,11 +295,16 @@ function pingButton(type, response){
 }
 
 function attemptAdvance(){
-    questionAttempts = questionAttempts + 1
-    pageAttempts = pageAttempts + 1
+    questionAttempts = questionAttempts + 1;
+    pageAttempts = pageAttempts + 1;
+    CreateCompInfo();
     if(Question_1 == "True" && Question_2 == comprehensionTwo && Question_3 == "You earn $0" && Question_4 == comprehensionFour && Question_5 == comprehensionFive){
-       CreateCompInfo();
-       dallinger.goToPage('experiment');  
+        dallinger.createInfo(my_node_id ,{
+            contents: questionAttempts,
+            info_type: 'Attempts_Info'
+        }).done(function(resp){
+            dallinger.goToPage('experiment');
+        })  
     } else {
         $("#warning").show();
         if(pageAttempts == 2){
@@ -319,7 +324,6 @@ function CreateCompInfo(){
         "Question 3" : Question_3,
         "Question 4" : Question_4,
         "Question 5" : Question_5,
-        "Question attempts": questionAttempts,
     };
     resps = JSON.stringify(resps);
     dallinger.createInfo(my_node_id ,{

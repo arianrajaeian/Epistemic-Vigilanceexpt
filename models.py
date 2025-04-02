@@ -118,8 +118,12 @@ class Answer_Info(Info):
     __mapper_args__ = {"polymorphic_identity": "Answer_Info"}
 
 class Comp_Info(Info):
-    """Info used to record how many tries participants took to get the comprehension check correct."""
+    """Info used to record what participants answered each time they submit the comprehension questions."""
     __mapper_args__ = {"polymorphic_identity": "Comp_Info"}
+
+class Attempts_Info(Info):
+     """Info used to record how many tries participants took to get the comprehension check correct."""
+     __mapper_args__ = {"polymorphic_identity": "Attempts_Info"}
 
 class First_guess(Info):
     """Info used for player 2 making their first guess"""
