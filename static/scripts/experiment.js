@@ -310,7 +310,8 @@ function createOutcomeInfo(finalAnswer){
     }
     dallinger.createInfo(node_id,{
         contents: Outcome,
-        info_type: 'Answer_Info'
+        info_type: 'Answer_Info',
+        property1: Questions
     })   
 }
 
