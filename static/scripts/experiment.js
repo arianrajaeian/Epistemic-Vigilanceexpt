@@ -242,7 +242,12 @@ function socialDiv(answer){
     $("#Info_div").show();
     $("#Submit_revision").show();      
     $("#Small_header").html("You answered: " + answer);
-    $("#first_guess").html("You may amend your answer if you wish.");  
+    $("#first_guess").html("You may amend your answer if you wish.");
+    if (condition == "Cooperative") {
+        $("#Reminder").html("Reminder: Player 1 receieves $0.05 if you answer correctly")
+    } else if (condition == "Competitive") {
+        $("#Reminder").html("Reminder: Player 1 receives $0.05 if you answer wrong")
+    }
     displayAdvice();
 } 
 
