@@ -206,6 +206,7 @@ function adviceDiv(answer){
     $("#advice_score").html("0");
     $("#Submit_advice").show(); // button that allows you to submit
     $("#feedback_div").show(); // overall div
+    $("#Reminder").show();
     $("#Small_header").html("You answered: " + answer);
     $("#guessLabel").html("What would you like to tell Player 2 your answer was?")
     if (metacognition == "Yes"){
@@ -214,6 +215,11 @@ function adviceDiv(answer){
         $("#secondSlider").show(); // show the confidence slider
     } else {
         $("#Confidence").hide();
+    }
+    if (condition == "Cooperative") {
+        $("#Reminder").html("Reminder: You earn $0.05 if player 2 answers correctly");
+    } else if (condition == "Competitive") {
+        $("#Reminder").html("Reminder: You earn $0.05 if player 2 answers wrong");
     }
     createOutcomeInfo(answer); // calls this function
     Answer = answer; //not sure why, but it saves what you answered for your answer as "Answer"
@@ -274,6 +280,7 @@ function submitAdvice(advice, confidence = null){ // confidence slider will be b
     createJSONInfo(); // calls function
     $("#Slider").hide(); //hides slider
     $("#Submit_advice").hide();
+    $("#Reminder").hide();
     continueTrial(); // calls function
 }
 
