@@ -175,7 +175,10 @@ function submitAnswer(answer){
     } else {
        $("#Feedback").html("Your answer, " + answer +", would be marked as incorrect.")
     }
-    $("#answer_div").show();    
+    $("#answer_div").show();
+    if (Questions == 5) {
+        $("#Ready").hide();
+    }    
 }
 
 
