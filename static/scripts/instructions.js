@@ -37,11 +37,6 @@ function backButton(){
         $("#Two").hide();
         $("#Back").hide();
     }
-    if ($('#Three').is(':visible')){
-        $("#Three").hide();
-        $("#Two").show();
-        button.textContent = "Next";
-    }
 }
 
 function nextButton(){
@@ -51,10 +46,6 @@ function nextButton(){
         $("#Two").show();
         $("#Back").show();
     } else if ($('#Two').is(':visible')){
-        $("#Two").hide();
-        $("#Three").show();
-        button.textContent = "Next"
-    } else if ($('#Three').is(':visible')){
         dallinger.goToPage('instructions/mocktrials')
     }
 }
