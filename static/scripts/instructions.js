@@ -52,28 +52,18 @@ function nextButton(){
 
 //// Mock trials ////
 function continueTrial(){
-    if ($('#answer_div').is(':visible')){
-        if (Questions == 5){
+    if (Questions == 5){
             dallinger.goToPage('instructions/Instructions_2');
-        } 
-        else if(Questions < 5){ // We could consider doing fewer practice questions. Before it was two for player 1 and two for player 2. 2/3 may be enough here.
-            displayPageElements();
-            $("#Small_header").html("You are about to see a practice question. When you are ready, click the button below to reveal the image.");
-        }
-    } else {       
+        } else if(Questions < 5){ // We could consider doing fewer practice questions. Before it was two for player 1 and two for player 2. 2/3 may be enough here.
         generateDots();
         presentDisplay();
-        Questions = Questions + 1
+        Questions = Questions + 1;
         $("#Small_header").hide();
+        $("#answer_div").hide();
         $("#Next").hide();
-    }        
+        }   
 }
 
-function displayPageElements(){
-    $("#answer_div").hide(); 
-    $("#Small_header").show();
-    $("#Next").show();
-};
 
 function shuffle(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
