@@ -20,6 +20,7 @@ function determinePlayer(){
     node_id = dallinger.storage.get("my_node_id");
     node_type = dallinger.storage.get("node_type");
     metacognition = dallinger.storage.get("metacognition"); // retrieve info about if there is metacognition.
+    condition = dallinger.storage.get("condition");
     if(node_type == "Drone_node"){
         Player = "A" // if the node is a drone, it's player A.
     } else {
