@@ -249,6 +249,8 @@ function socialDiv(answer){
         $("#Reminder").html("Reminder: Player 1 receieves $0.05 if you answer correctly")
     } else if (condition == "Competitive") {
         $("#Reminder").html("Reminder: Player 1 receives $0.05 if you answer wrong")
+    } else if (condition == "Neutral") {
+        $("#Reminder").html("Reminder: Your answers do not affect player 1's bonus")
     }
     displayAdvice();
 } 
