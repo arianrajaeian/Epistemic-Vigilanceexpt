@@ -220,6 +220,8 @@ function adviceDiv(answer){
         $("#Reminder").html("Reminder: You earn $0.05 if player 2 answers correctly");
     } else if (condition == "Competitive") {
         $("#Reminder").html("Reminder: You earn $0.05 if player 2 answers wrong");
+    } else if (condition == "Neutral") {
+        $("#Reminder").html("Reminder: Player 2's answer will not affect your bonus");
     }
     createOutcomeInfo(answer); // calls this function
     Answer = answer; //not sure why, but it saves what you answered for your answer as "Answer"
