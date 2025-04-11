@@ -217,11 +217,11 @@ function adviceDiv(answer){
         $("#Confidence").hide();
     }
     if (condition == "Cooperative") {
-        $("#Reminder").html("Reminder: You earn $0.05 if player 2 answers correctly");
+        $("#Reminder").html("Reminder: You earn an extra $0.05 if player 2 gets the answer right");
     } else if (condition == "Competitive") {
-        $("#Reminder").html("Reminder: You earn $0.05 if player 2 answers wrong");
+        $("#Reminder").html("Reminder: You earn an extra $0.05 if player 2 gets the answer wrong");
     } else if (condition == "Neutral") {
-        $("#Reminder").html("Reminder: Player 2's answer will not affect your bonus");
+        $("#Reminder").html("Reminder: Player 2's answer will not affect your bonus payment");
     }
     createOutcomeInfo(answer); // calls this function
     Answer = answer; //not sure why, but it saves what you answered for your answer as "Answer"
@@ -246,11 +246,11 @@ function socialDiv(answer){
     $("#Small_header").html("You answered: " + answer);
     $("#first_guess").html("You may amend your answer if you wish.");
     if (condition == "Cooperative") {
-        $("#Reminder").html("Reminder: Player 1 receieves $0.05 if you answer correctly")
+        $("#Reminder").html("Reminder: Player 1 earns an extra $0.05 if you get the answer right")
     } else if (condition == "Competitive") {
-        $("#Reminder").html("Reminder: Player 1 receives $0.05 if you answer wrong")
+        $("#Reminder").html("Reminder: Player 1 earns an extra $0.05 if you get the answer wrong")
     } else if (condition == "Neutral") {
-        $("#Reminder").html("Reminder: Your answers do not affect player 1's bonus")
+        $("#Reminder").html("Reminder: Player 1's bonus payment is not affected by your answer")
     }
     displayAdvice();
 } 
