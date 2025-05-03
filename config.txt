@@ -21,8 +21,8 @@ database_size = standard-2
 
 [Server] 
 dyno_type = standard-2x
-num_dynos_web = 5
-num_dynos_worker = 3
+num_dynos_web = 7
+num_dynos_worker = 4
 redis_size = premium-0
 host = 0.0.0.0
 clock_on = true
