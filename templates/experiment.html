@@ -28,7 +28,7 @@
              <img id="stimulus" class="stimulus_image" src="" width="500px"/>
            </div>            
         </div>
-    <div class = "row" id = "Slider" style = "display:none;">
+    <div class = "row" id = "Slider" style = "display:none; position: relative; overflow: hidden; z-index: 1;">
         <!---First slider for guessinng-->
         <div class = "col-md-12 text-center" style="margin-top: 40px;">
             <div class = "slidecontainer">
@@ -65,12 +65,12 @@
         </div> 
     </div>        
 
-    <div class = "row"> 
+    <div class = "row" style = "position: relative; z-index: 5;"> 
         <div class="col-md-9"></div>
         <div class="col-md-3"> 
-            <button id = "Next" type="button" class="btn btn-success btn-lg" style = "position: relative; z-index: 9999;" onClick="continueTrial();">
+            <button id = "Next" type="button" class="btn btn-success btn-lg" onClick="continueTrial();">
             Continue</button> 
-            <button id = "Submit_answer" type="button" class="btn btn-success btn-lg" style = "display:none; position: relative; z-index: 9999;" disabled onClick="submitAnswer(guessSlider.prop('value'));">
+            <button id = "Submit_answer" type="button" class="btn btn-success btn-lg" style = "display:none;" disabled onClick="submitAnswer(guessSlider.prop('value'));">
             Submit</button>
             <button id = "Submit_advice" type="button" class="btn btn-success btn-lg" style = "display:none" disabled onClick="submitAdvice(guessSlider.prop('value'), confSlider.prop('value'));">
             Submit</button>
