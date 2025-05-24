@@ -42,7 +42,11 @@ function getInfo() {
 
 function extractInfo(){
     // Pull out the needed information for player B
-    Contents = JSON.parse(Infos[Questions - 1].contents);
+    matchedInfo = Infos.find(function(info) {
+        content = JSON.parse(info.contents);
+        return content.Question == Questions;
+    });
+    Contents = JSON.parse(matchedInfo.contents);
     transmitted_blueDots = Contents.Blue; // Transmit the blue dots
     transmitted_yellowDots = Contents.Yellow; //Transmit yellow dots 
     A_advice = Contents.Advice; // Player A's advice 
