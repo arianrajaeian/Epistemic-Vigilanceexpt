@@ -49,7 +49,8 @@ function extractInfo(){
     Contents = JSON.parse(matchedInfo.contents);
     transmitted_blueDots = Contents.Blue; // Transmit the blue dots
     transmitted_yellowDots = Contents.Yellow; //Transmit yellow dots
-    transmitted_answer = Contents.CorrectAnswer; 
+    transmitted_answer = Contents.CorrectAnswer;
+    A_Question = Contents.Question; 
     A_advice = Contents.Advice; // Player A's advice 
     if (metacognition == "Yes"){
         A_confidence = Contents.Confidence; // Player A's confidence
@@ -272,7 +273,8 @@ function displayAdvice(){
         "Advice" : A_advice,
         "Blue Dots" : transmitted_blueDots,
         "Yellow Dots" : transmitted_yellowDots,
-        "Correct Answer" : transmitted_answer
+        "Correct Answer" : transmitted_answer,
+        "Player 1 Question" : A_Question
     }
     if (metacognition == "Yes"){
         resps["Confidence"] = A_confidence;
