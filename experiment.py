@@ -198,7 +198,7 @@ class Epivigi(Experiment):
         self.log(len(participant.infos(type = self.models.Answer_Info)))
         if len(participant.infos(type = self.models.Answer_Info)) != Nq: # We expect the participant to have 20 answer infos (record of correct/incorrect) if all has worked
             try: # This try block is necessary to catch cases where players are sent to the woops page (by then, they have not even created a Node).
-                node = participant.nodes()[0] 
+                node = participant.nodes(failed="all")[0] 
                 node.network.finished = "No" # Signal that the network has still not finished
                 if node.type == "Drone_node":
                     node.network.ready_for_B = "No" # If a Player 1 fails the datacheck, also signal that the network is not ready for Player 2 yet.
